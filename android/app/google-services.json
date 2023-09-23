@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "523118989857",
+    "project_id": "kalpaka-register-app",
+    "storage_bucket": "kalpaka-register-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523118989857:android:17d2b25ed96657d5c18960",
+        "android_client_info": {
+          "package_name": "com.sra.kalpaka_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg33Yjf0l_2qHd7EYmv7PHTS_xwU49BGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

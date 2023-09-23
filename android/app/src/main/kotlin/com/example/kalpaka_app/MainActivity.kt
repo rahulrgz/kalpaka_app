@@ -1,4 +1,4 @@
-package com.example.kalpaka_app
+package com.sra.kalpaka_app
 
 import io.flutter.embedding.android.FlutterActivity
 
