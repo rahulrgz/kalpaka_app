@@ -5,6 +5,7 @@ import 'package:kalpaka_app/features/orders/add_order.dart';
 
 import '../../core/global_variables/global_variables.dart';
 import '../../core/theme/pallete.dart';
+import 'ViewOrder.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -41,66 +42,76 @@ class _OrderScreenState extends State<OrderScreen> {
                     bottom: h * 0.015,
                     right: h * 0.015,
                     left: h * 0.015),
-                child: Container(
-                  height: h * 0.12,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(h * 0.025),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Pallete.shadowColor,
-                          blurRadius: 2,
-                          spreadRadius: 1,
-                          offset: Offset(0, 0)),
-                    ],
-                    color: Pallete.whiteColor,
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: h * 0.02,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const ViewOrderScreen(),
                       ),
-                      Container(
-                        height: h * 0.09,
-                        width: h * 0.09,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(h * 0.025),
+                    );
+                  },
+                  child: Container(
+                    height: h * 0.12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(h * 0.025),
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Pallete.primaryColor,
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            offset: Offset(0, 0)),
+                      ],
+                      color: Pallete.whiteColor,
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: h * 0.02,
                         ),
-                        child: Image.asset(AssetConstants.logo),
-                      ),
-                      SizedBox(
-                        width: h * 0.02,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: h * 0.013),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Eicher 2053XP',
-                              style: TextStyle(
-                                  fontSize: h * 0.021,
-                                  color: Pallete.darkColor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Customer: Rahul',
-                              style: TextStyle(
-                                  fontSize: h * 0.017,
-                                  color: Pallete.darkColor),
-                            ),
-                            Text(
-                              'Pending',
-                              style: TextStyle(
-                                  fontSize: h * 0.015, color: Colors.red),
-                            ),
-                            SizedBox(
-                              height: h * 0.01,
-                            )
-                          ],
+                        Container(
+                          height: h * 0.09,
+                          width: h * 0.09,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(h * 0.025),
+                          ),
+                          child: Image.asset(AssetConstants.logo),
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          width: h * 0.02,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: h * 0.013),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Eicher 2053XP',
+                                style: TextStyle(
+                                    fontSize: h * 0.021,
+                                    color: Pallete.darkColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Customer: Rahul',
+                                style: TextStyle(
+                                    fontSize: h * 0.017,
+                                    color: Pallete.darkColor),
+                              ),
+                              Text(
+                                'Pending',
+                                style: TextStyle(
+                                    fontSize: h * 0.015, color: Colors.red),
+                              ),
+                              SizedBox(
+                                height: h * 0.01,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               );

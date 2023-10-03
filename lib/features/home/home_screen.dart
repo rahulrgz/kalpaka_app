@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
+import 'package:kalpaka_app/features/document/add_document.dart';
+import 'package:kalpaka_app/features/document/document_screen.dart';
+import 'package:kalpaka_app/features/orders/add_order.dart';
+import 'package:kalpaka_app/features/orders/order_screen.dart';
 import 'package:kalpaka_app/features/profile/profile_screen.dart';
+import 'package:kalpaka_app/features/staff/add_staff.dart';
+import 'package:kalpaka_app/features/staff/office_staff.dart';
+import 'package:kalpaka_app/features/staff/staff_page.dart';
 
 import '../../core/global_variables/global_variables.dart';
 
@@ -122,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Add >',
+                                      'View >',
                                       style: TextStyle(
                                           fontSize: h * 0.012,
                                           color: Pallete.darkColor),
@@ -142,21 +149,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Pallete.darkColor),
                                 ),
                                 const Spacer(),
-                                Container(
-                                  height: h * 0.05,
-                                  width: w * 0.25,
-                                  decoration: BoxDecoration(
-                                    color: Pallete.blackColor,
-                                    borderRadius:
-                                        BorderRadius.circular(h * 0.01),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'VIEW ALL',
-                                      style: TextStyle(
-                                          fontSize: h * 0.016,
-                                          fontWeight: FontWeight.bold,
-                                          color: Pallete.whiteColor),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                          builder: (context) =>
+                                              const StaffScreen()),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: h * 0.05,
+                                    width: w * 0.25,
+                                    decoration: BoxDecoration(
+                                      color: Pallete.blackColor,
+                                      borderRadius:
+                                          BorderRadius.circular(h * 0.01),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'VIEW ALL',
+                                        style: TextStyle(
+                                            fontSize: h * 0.016,
+                                            fontWeight: FontWeight.bold,
+                                            color: Pallete.whiteColor),
+                                      ),
                                     ),
                                   ),
                                 )
@@ -187,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Add >',
+                                      'View >',
                                       style: TextStyle(
                                           fontSize: h * 0.012,
                                           color: Pallete.darkColor),
@@ -207,21 +224,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Pallete.darkColor),
                                 ),
                                 const Spacer(),
-                                Container(
-                                  height: h * 0.05,
-                                  width: w * 0.25,
-                                  decoration: BoxDecoration(
-                                    color: Pallete.blackColor,
-                                    borderRadius:
-                                        BorderRadius.circular(h * 0.01),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'VIEW ALL',
-                                      style: TextStyle(
-                                          fontSize: h * 0.016,
-                                          fontWeight: FontWeight.bold,
-                                          color: Pallete.whiteColor),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                          builder: (context) =>
+                                              const StaffScreen()),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: h * 0.05,
+                                    width: w * 0.25,
+                                    decoration: BoxDecoration(
+                                      color: Pallete.blackColor,
+                                      borderRadius:
+                                          BorderRadius.circular(h * 0.01),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'VIEW ALL',
+                                        style: TextStyle(
+                                            fontSize: h * 0.016,
+                                            fontWeight: FontWeight.bold,
+                                            color: Pallete.whiteColor),
+                                      ),
                                     ),
                                   ),
                                 )
@@ -262,7 +289,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   backgroundColor: Pallete.primaryColor,
                                   radius: h * 0.027,
                                   child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                              builder: (context) =>
+                                                  const AddOrder()),
+                                        );
+                                      },
                                       icon: Icon(
                                         CupertinoIcons.cart_badge_plus,
                                         size: h * 0.022,
@@ -298,7 +332,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   backgroundColor: Pallete.primaryColor,
                                   radius: h * 0.027,
                                   child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                              builder: (context) =>
+                                                  const AddStaff()),
+                                        );
+                                      },
                                       icon: Icon(
                                         CupertinoIcons.person_add,
                                         size: h * 0.022,
@@ -334,7 +375,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   backgroundColor: Pallete.primaryColor,
                                   radius: h * 0.027,
                                   child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                              builder: (context) =>
+                                                  const AddDocument()),
+                                        );
+                                      },
                                       icon: Icon(
                                         CupertinoIcons.arrow_up_doc,
                                         size: h * 0.022,
@@ -450,7 +498,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       backgroundColor: Pallete.primaryColor,
                                       radius: h * 0.027,
                                       child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      const OfficeStaffScreen()),
+                                            );
+                                          },
                                           icon: Icon(
                                             CupertinoIcons.person_2,
                                             size: h * 0.022,
@@ -486,7 +541,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       backgroundColor: Pallete.primaryColor,
                                       radius: h * 0.027,
                                       child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      const StaffScreen()),
+                                            );
+                                          },
                                           icon: Icon(
                                             CupertinoIcons.person_3,
                                             size: h * 0.022,
@@ -522,7 +584,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       backgroundColor: Pallete.primaryColor,
                                       radius: h * 0.027,
                                       child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      const DocumentScreen()),
+                                            );
+                                          },
                                           icon: Icon(
                                             CupertinoIcons.doc,
                                             size: h * 0.022,
@@ -558,7 +627,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       backgroundColor: Pallete.primaryColor,
                                       radius: h * 0.027,
                                       child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      const OrderScreen()),
+                                            );
+                                          },
                                           icon: Icon(
                                             CupertinoIcons.cart,
                                             size: h * 0.022,

@@ -52,7 +52,7 @@ class _StaffScreenState extends State<StaffScreen> {
                           'https://imgs.search.brave.com/c8-hFX17UBw6T_HbSMWxxc5IzjOxJMGyKYl3hqyAk8s/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTA2/MTYzNjU1MC9waG90/by93aGVyZS1kb2Vz/LXRoaXMtYmlsbC1j/b21lLWZyb20uanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPTJw/eDFQdTh1SnptbVVK/LXIwVVJaQV92WXV5/a1MzT0tjTFdCNEVn/eENZSms9'),
                     ),
                     title: const Text('Rahul Ramesh'),
-                    subtitle: const Text('Salary: 1000/-'),
+                    subtitle: const Text('Status: Leave'),
                     trailing: IconButton(
                         onPressed: () {},
                         icon: Icon(Icons.more_horiz_outlined)),

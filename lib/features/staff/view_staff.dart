@@ -25,20 +25,22 @@ class _ViewStaffState extends State<ViewStaff> {
         backgroundColor: Pallete.secondaryColor,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(w * 0.05)),
-        actionsPadding: EdgeInsets.only(bottom: h * 0.05),
+        actionsPadding: EdgeInsets.only(bottom: h * 0.03),
         content: SizedBox(
-          height: h * 0.04,
+          height: h * 0.05,
           width: w * 0.3,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Text('Are you sure you want to delete?',
-                    style: TextStyle(
-                        fontSize: h * 0.019,
-                        color: Pallete.whiteColor,
-                        fontWeight: FontWeight.bold)),
-              ),
+              Text('Are you sure you want to ',
+                  style: TextStyle(
+                      fontSize: h * 0.019,
+                      color: Pallete.whiteColor,
+                      fontWeight: FontWeight.bold)),
+              Text('delete?',
+                  style: TextStyle(
+                      fontSize: h * 0.019,
+                      color: Pallete.whiteColor,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
         ),
@@ -225,15 +227,20 @@ class _ViewStaffState extends State<ViewStaff> {
                         Text(
                           'Status :',
                           style: TextStyle(
-                              fontSize: h * 0.022,
+                              fontSize: h * 0.015,
                               color: Pallete.darkColor,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          'Leave',
-                          style: TextStyle(
-                            fontSize: h * 0.02,
-                            color: Colors.red,
+                        SizedBox(
+                          height: h * 0.01,
+                        ),
+                        Center(
+                          child: Text(
+                            'Leave',
+                            style: TextStyle(
+                              fontSize: h * 0.02,
+                              color: Colors.red,
+                            ),
                           ),
                         ),
                       ],
@@ -260,16 +267,21 @@ class _ViewStaffState extends State<ViewStaff> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Total Days:',
+                          'OverTime:',
                           style: TextStyle(
-                              fontSize: h * 0.022,
+                              fontSize: h * 0.015,
                               color: Pallete.darkColor,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          '24',
-                          style: TextStyle(
-                              fontSize: h * 0.02, color: Pallete.darkColor),
+                        SizedBox(
+                          height: h * 0.01,
+                        ),
+                        Center(
+                          child: Text(
+                            '0',
+                            style: TextStyle(
+                                fontSize: h * 0.02, color: Pallete.darkColor),
+                          ),
                         ),
                       ],
                     ),
@@ -305,14 +317,19 @@ class _ViewStaffState extends State<ViewStaff> {
                         Text(
                           'Total Days:',
                           style: TextStyle(
-                              fontSize: h * 0.022,
+                              fontSize: h * 0.015,
                               color: Pallete.darkColor,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          '24',
-                          style: TextStyle(
-                              fontSize: h * 0.02, color: Pallete.darkColor),
+                        SizedBox(
+                          height: h * 0.01,
+                        ),
+                        Center(
+                          child: Text(
+                            '24',
+                            style: TextStyle(
+                                fontSize: h * 0.02, color: Pallete.darkColor),
+                          ),
                         ),
                       ],
                     ),
@@ -337,16 +354,21 @@ class _ViewStaffState extends State<ViewStaff> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Total Days:',
+                          'Total Credit:',
                           style: TextStyle(
-                              fontSize: h * 0.022,
+                              fontSize: h * 0.015,
                               color: Pallete.darkColor,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          '24',
-                          style: TextStyle(
-                              fontSize: h * 0.02, color: Pallete.darkColor),
+                        SizedBox(
+                          height: h * 0.01,
+                        ),
+                        Center(
+                          child: Text(
+                            '24000',
+                            style: TextStyle(
+                                fontSize: h * 0.02, color: Pallete.darkColor),
+                          ),
                         ),
                       ],
                     ),
@@ -355,6 +377,20 @@ class _ViewStaffState extends State<ViewStaff> {
               ],
             ),
           ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Pallete.darkColor,
+        foregroundColor: Pallete.whiteColor,
+        onPressed: () {},
+        icon: Icon(
+          CupertinoIcons.time,
+          size: h * 0.02,
+        ),
+        label: Text(
+          'Update Today Status',
+          style: TextStyle(fontSize: h * 0.017),
         ),
       ),
     );
