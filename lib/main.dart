@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/global_variables/global_variables.dart';
 import 'features/home/bottomnavbar_page.dart';
 import 'package:provider/provider.dart';
-
 import 'features/login/auth/auth_provider.dart';
 
 void main() async {
@@ -19,15 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-      ],
-      child: const MaterialApp(
-        title: 'Kalpaka',
-        home: BottomNav(),
-        debugShowCheckedModeBanner: false,
-      ),
+    return const MaterialApp(
+      title: 'Kalpaka',
+      home: BottomNav(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
