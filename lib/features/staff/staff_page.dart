@@ -49,13 +49,13 @@ class _StaffScreenState extends State<StaffScreen> {
                     leading: CircleAvatar(
                       radius: h * 0.023,
                       foregroundImage: const NetworkImage(
-                          'https://imgs.search.brave.com/c8-hFX17UBw6T_HbSMWxxc5IzjOxJMGyKYl3hqyAk8s/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTA2/MTYzNjU1MC9waG90/by93aGVyZS1kb2Vz/LXRoaXMtYmlsbC1j/b21lLWZyb20uanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPTJw/eDFQdTh1SnptbVVK/LXIwVVJaQV92WXV5/a1MzT0tjTFdCNEVn/eENZSms9'),
+                          'https://rahulrgz.github.io/rahul/assets/img/profile-img.png'),
                     ),
                     title: const Text('Rahul Ramesh'),
-                    subtitle: const Text('Status: Leave'),
+                    subtitle: const Text('Status: Full Day'),
                     trailing: IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.more_horiz_outlined)),
+                        icon: const Icon(Icons.more_horiz_outlined)),
                   ),
                 ),
               );

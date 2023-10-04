@@ -55,7 +55,7 @@ class _DocumentScreenState extends State<DocumentScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(h * 0.015),
                         ),
-                        child: Icon(CupertinoIcons.doc_text_fill),
+                        child: const Icon(CupertinoIcons.doc_text_fill),
                       ),
                       Text(
                         'DASH DOCUMENTS',

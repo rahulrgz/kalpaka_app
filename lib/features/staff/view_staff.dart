@@ -118,6 +118,8 @@ class _ViewStaffState extends State<ViewStaff> {
                   ),
                   CircleAvatar(
                     radius: h * 0.025,
+                    foregroundImage: const NetworkImage(
+                        'https://rahulrgz.github.io/rahul/assets/img/profile-img.png'),
                   ),
                   SizedBox(
                     width: w * 0.025,

@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: CircleAvatar(
                         foregroundImage: const NetworkImage(
-                            'https://imgs.search.brave.com/Bsnrb5XLpxYHujtyiQSrGRli5t6ImqNeM4ShyxH4P_o/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9wb3J0/cmFpdC1wcmV0dHkt/aGFwcHktcGVyc29u/LXVzaW5nLXBob25l/LWlzb2xhdGVkLXBp/bmstYmFja2dyb3Vu/ZC1wb3J0cmFpdC1w/cmV0dHktaGFwcHkt/cGVyc29uLXVzaW5n/LXBob25lLWlzb2xh/dGVkLTE1Njk2MTY5/OS5qcGc'),
+                            'https://rahulrgz.github.io/rahul/assets/img/profile-img.png'),
                         radius: h * 0.025,
                       ),
                     ),
@@ -856,7 +856,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             height: h * 0.01,
                                           ),
                                           Text(
-                                            'VIJITH EK',
+                                            'Rahul ',
                                             style: TextStyle(
                                                 fontSize: h * 0.015,
                                                 color: Pallete.darkColor),

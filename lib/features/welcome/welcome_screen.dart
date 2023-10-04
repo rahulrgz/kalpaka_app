@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
 import 'package:kalpaka_app/features/home/home_screen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import '../../core/constants/asset_constants/asset_constants.dart';
 import '../../core/global_variables/global_variables.dart';
-import '../login/auth/auth_provider.dart';
 import '../login/screens/login_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -19,8 +17,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AuthProvider>(context, listen: false);
-
     return Scaffold(
       backgroundColor: Pallete.primaryColor,
       appBar: AppBar(
@@ -79,16 +75,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     backgroundColor: Pallete.secondaryColor,
                     maximumSize: Size(w * 0.8, h * 0.07)),
                 onPressed: () {
-                  ap.isSignedIn == true
-                      ? Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => const HomeScreen()))
-                      : Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => const LoginScreen()),
-                        );
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => const LoginScreen()),
+                  );
                 },
                 child: const Center(
                   child: Row(

@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kalpaka_app/features/document/document_screen.dart';
+import 'package:kalpaka_app/features/orders/order_screen.dart';
+import 'package:kalpaka_app/features/staff/staff_page.dart';
 
 import '../../core/global_variables/global_variables.dart';
 import '../../core/theme/pallete.dart';
@@ -56,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       CircleAvatar(
                         foregroundImage: const NetworkImage(
-                            'https://imgs.search.brave.com/Bsnrb5XLpxYHujtyiQSrGRli5t6ImqNeM4ShyxH4P_o/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9wb3J0/cmFpdC1wcmV0dHkt/aGFwcHktcGVyc29u/LXVzaW5nLXBob25l/LWlzb2xhdGVkLXBp/bmstYmFja2dyb3Vu/ZC1wb3J0cmFpdC1w/cmV0dHktaGFwcHkt/cGVyc29uLXVzaW5n/LXBob25lLWlzb2xh/dGVkLTE1Njk2MTY5/OS5qcGc'),
+                            'https://rahulrgz.github.io/rahul/assets/img/profile-img.png'),
                         radius: h * 0.03,
                       ),
                       SizedBox(
@@ -108,48 +111,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: h * 0.007,
                       ),
                       ListTile(
-                        leading: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.person_2,
-                              size: h * 0.023,
-                            )),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => const StaffScreen()),
+                          );
+                        },
+                        leading: Icon(
+                          CupertinoIcons.person_2,
+                          size: h * 0.023,
+                        ),
                         title: const Text('Staff Details'),
                       ),
                       ListTile(
-                        leading: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.cart,
-                              size: h * 0.023,
-                            )),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => const OrderScreen()),
+                          );
+                        },
+                        leading: Icon(
+                          CupertinoIcons.cart,
+                          size: h * 0.023,
+                        ),
                         title: const Text('Orders'),
                       ),
                       ListTile(
-                        leading: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.doc_chart,
-                              size: h * 0.023,
-                            )),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => const DocumentScreen()),
+                          );
+                        },
+                        leading: Icon(
+                          CupertinoIcons.doc_chart,
+                          size: h * 0.023,
+                        ),
                         title: const Text('Documents'),
                       ),
                       ListTile(
-                        leading: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.chart_bar_square,
-                              size: h * 0.023,
-                            )),
+                        onTap: () {},
+                        leading: Icon(
+                          CupertinoIcons.chart_bar_square,
+                          size: h * 0.023,
+                        ),
                         title: const Text('Analysis'),
                       ),
                       ListTile(
-                        leading: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              size: h * 0.023,
-                            )),
+                        onTap: () {},
+                        leading: Icon(
+                          CupertinoIcons.bell,
+                          size: h * 0.023,
+                        ),
                         title: const Text('Notifications'),
                       ),
                       SizedBox(

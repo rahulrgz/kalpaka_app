@@ -11,8 +11,8 @@ class OfficeStaffScreen extends StatefulWidget {
 class _OfficeStaffScreenState extends State<OfficeStaffScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Pallete.whiteColor,
+    return const Scaffold(
+      backgroundColor: Colors.greenAccent,
     );
   }
 }

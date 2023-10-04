@@ -123,7 +123,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -139,6 +139,10 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                     height: h * 0.15,
                     width: h * 0.15,
                     color: Colors.red,
+                    child: Image.network(
+                      'https://scontent.fcok4-1.fna.fbcdn.net/v/t1.6435-9/122314289_180909316906067_4725046546716825343_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=ImuiRPnECwcAX9l4IEN&_nc_ht=scontent.fcok4-1.fna&oh=00_AfCYwah78HnlPyk8zhAZOXrxuz1CMEWeBNBMrm8Hv3bygw&oe=6544A4F2',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   SizedBox(width: w * 0.02),
                   Column(
