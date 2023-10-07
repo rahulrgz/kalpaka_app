@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/core/global_variables/global_variables.dart';
 import 'features/home/bottomnavbar_page.dart';
 import 'features/login/screens/login_screen.dart';
@@ -7,7 +8,7 @@ import 'features/login/screens/login_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     w = MediaQuery.of(context).size.width;
     return const MaterialApp(
       title: 'Kalpaka',
-      home: LoginScreen(),
+      home: BottomNav(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,19 +1,20 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/core/constants/asset_constants/asset_constants.dart';
 import 'package:kalpaka_app/core/global_variables/global_variables.dart';
+import 'package:kalpaka_app/features/login/controller/login_controller.dart';
 import 'package:kalpaka_app/features/login/screens/userdetails.dart';
 import '../../../core/theme/pallete.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,12 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => UserDetails(),
-                              ),
-                            );
+                            googlesignin(ref: ref, context: context);
                           },
                           child: Container(
                             height: h * 0.065,
@@ -129,12 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => UserDetails(),
-                              ),
-                            );
+                            googlesignin(ref: ref, context: context);
                           },
                           child: Container(
                             height: h * 0.065,
@@ -181,5 +172,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void googlesignin({required WidgetRef ref, required BuildContext context}) {
+    ref.read(loginControllerProvider).googlesignin(context: context);
   }
 }

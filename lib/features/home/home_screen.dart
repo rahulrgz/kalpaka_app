@@ -11,6 +11,7 @@ import 'package:kalpaka_app/features/staff/office_staff.dart';
 import 'package:kalpaka_app/features/staff/staff_page.dart';
 
 import '../../core/global_variables/global_variables.dart';
+import '../analysis/screen/analysis_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -678,7 +679,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       backgroundColor: Pallete.primaryColor,
                                       radius: h * 0.027,
                                       child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                builder: (context) =>
+                                                    const AnalysisScreen(),
+                                              ),
+                                            );
+                                          },
                                           icon: Icon(
                                             CupertinoIcons.chart_bar_square,
                                             size: h * 0.022,
