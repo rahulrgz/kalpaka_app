@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,15 +25,36 @@ class _AddStaffState extends State<AddStaff> {
   TextEditingController place = TextEditingController();
   TextEditingController salary = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String? _pickedImagePath;
   XFile? _pickedImage;
+
+  Future<String> uploadImageToFirebase(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      firebase_storage.Reference firebaseStorageRef =
+          firebase_storage.FirebaseStorage.instance.ref().child(fileName);
+      firebase_storage.UploadTask uploadTask =
+          firebaseStorageRef.putFile(imageFile);
+      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+      String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print(e.toString());
+      return '';
+    }
+  }
 
   Future<void> _pickImagecam() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
+      File file = File(pickedFile.path);
+      String downloadUrl = await uploadImageToFirebase(file);
+
       setState(() {
         _pickedImage = pickedFile;
+        _pickedImagePath = downloadUrl;
       });
       Navigator.pop(context);
     } else {
@@ -50,8 +72,12 @@ class _AddStaffState extends State<AddStaff> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
+      File file = File(pickedFile.path);
+      String downloadUrl = await uploadImageToFirebase(file);
+
       setState(() {
         _pickedImage = pickedFile;
+        _pickedImagePath = downloadUrl;
       });
       Navigator.pop(context);
     } else {
@@ -330,7 +356,7 @@ class _AddStaffState extends State<AddStaff> {
                       age: age.text.trim(),
                       place: place.text.trim(),
                       salary: salary.text.trim(),
-                      profile: _pickedImage.toString(),
+                      profile: _pickedImagePath.toString(),
                     );
               } else {
                 showSnackBar(
