@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kalpaka_app/core/theme/pallete.dart';
 
 class OfficeStaffScreen extends StatefulWidget {
   const OfficeStaffScreen({super.key});

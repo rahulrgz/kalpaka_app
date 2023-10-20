@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/constants/firebase_constants/firebase_constants.dart';
 import '../../../core/failure.dart';
 import '../../../core/firebase_providers.dart';
 import '../../../core/type_def.dart';
 import '../../../model/staffModel.dart';
-import '../../login/repository/login_repository.dart';
 
 final staffRepositoryProvider = Provider((ref) => StaffRepository(
       firestore: ref.read(firestoreProvider),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kalpaka_app/core/constants/asset_constants/asset_constants.dart';
 import 'package:kalpaka_app/features/login/screens/login_screen.dart';
 import 'package:kalpaka_app/features/login/screens/userdetails.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/global_variables/global_variables.dart';
+import '../../core/theme/pallete.dart';
 import '../../model/usermodel.dart';
 import '../home/bottomnavbar_page.dart';
 import '../login/controller/login_controller.dart';
@@ -64,8 +67,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Pallete.blackColor,
       body: Center(
-        child: Text("welcome"),
+        child: SizedBox(
+          width: w * 0.6,
+          child: Image.asset(AssetConstants.wlogo),
+        ),
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/features/login/repository/login_repository.dart';
@@ -6,7 +5,6 @@ import 'package:kalpaka_app/features/login/screens/userdetails.dart';
 import 'package:kalpaka_app/model/usermodel.dart';
 
 import '../../../core/commons/utils.dart';
-import '../../../core/firebase_providers.dart';
 import '../../home/bottomnavbar_page.dart';
 import '../screens/login_screen.dart';
 

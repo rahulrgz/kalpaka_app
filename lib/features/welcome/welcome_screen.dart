@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
-import 'package:kalpaka_app/features/home/home_screen.dart';
 import 'package:lottie/lottie.dart';
 import '../../core/constants/asset_constants/asset_constants.dart';
 import '../../core/global_variables/global_variables.dart';

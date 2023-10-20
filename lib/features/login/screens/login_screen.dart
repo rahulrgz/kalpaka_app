@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/core/constants/asset_constants/asset_constants.dart';
 import 'package:kalpaka_app/core/global_variables/global_variables.dart';
 import 'package:kalpaka_app/features/login/controller/login_controller.dart';
-import 'package:kalpaka_app/features/login/screens/userdetails.dart';
 import '../../../core/theme/pallete.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -110,7 +108,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   radius: w * 0.03,
                                   backgroundColor: Colors.white,
                                   backgroundImage:
-                                      AssetImage(AssetConstants.apple),
+                                      const AssetImage(AssetConstants.apple),
                                 ),
                                 SizedBox(
                                   width: w * 0.01,
@@ -152,7 +150,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   radius: w * 0.03,
                                   backgroundColor: Colors.white,
                                   backgroundImage:
-                                      AssetImage(AssetConstants.google),
+                                      const AssetImage(AssetConstants.google),
                                 ),
                                 SizedBox(
                                   width: w * 0.01,

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/model/staffModel.dart';
 
 import '../../../core/commons/utils.dart';
-import '../../login/repository/login_repository.dart';
 import '../repository/staffRepository.dart';
 
 final staffControllerProvider = StateNotifierProvider((ref) {

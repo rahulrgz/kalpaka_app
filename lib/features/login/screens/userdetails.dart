@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kalpaka_app/features/home/bottomnavbar_page.dart';
 import 'package:kalpaka_app/model/usermodel.dart';
 
 import '../../../core/constants/asset_constants/asset_constants.dart';
