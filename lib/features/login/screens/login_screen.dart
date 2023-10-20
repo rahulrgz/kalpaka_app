@@ -15,6 +15,10 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
+  void googlesignin({required BuildContext context}) {
+    ref.read(loginControllerProvider.notifier).googlesignin(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +85,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Center(
                         child: InkWell(
                           onTap: () {
-                            googlesignin(ref: ref, context: context);
+                            //googlesignin( context: context);
                           },
                           child: Container(
                             height: h * 0.065,
@@ -125,7 +129,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Center(
                         child: InkWell(
                           onTap: () {
-                            googlesignin(ref: ref, context: context);
+                            googlesignin(context: context);
                           },
                           child: Container(
                             height: h * 0.065,
@@ -172,9 +176,5 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void googlesignin({required WidgetRef ref, required BuildContext context}) {
-    ref.read(loginControllerProvider).googlesignin(context: context);
   }
 }

@@ -1,11 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kalpaka_app/core/constants/firebase_constants/firebase_constants.dart';
 import 'package:kalpaka_app/core/failure.dart';
 import 'package:kalpaka_app/core/type_def.dart';
 import 'package:kalpaka_app/model/usermodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../core/firebase_providers.dart';
+
+final loginRepositoryProvider = Provider((ref) => LoginRepository(
+    firestore: ref.read(firestoreProvider),
+    auth: ref.read(authProvider),
+    googleSignIn: ref.read(googleSignInProvider)));
 
 class LoginRepository {
   final FirebaseAuth _auth;
@@ -20,30 +29,45 @@ class LoginRepository {
         _auth = auth,
         _googleSignIn = googleSignIn;
 
+  CollectionReference get _users =>
+      _firestore.collection(FirebaseConstants.usersCollections);
   FutureEither<UserModel> googleSignIn() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      final googleAuth = await googleUser?.authentication;
-      final credential = GoogleAuthProvider.credential(
+      final GoogleSignInAccount? googleuser = await _googleSignIn.signIn();
+      final googleAuth = await googleuser?.authentication;
+      final credentials = GoogleAuthProvider.credential(
           accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-      UserCredential userCredential =
-          await _auth.signInWithCredential(credential);
-      String loginId = userCredential.user!.uid;
+      UserCredential userCredentials =
+          await _auth.signInWithCredential(credentials);
 
-      UserModel user;
-
-      if (userCredential.additionalUserInfo!.isNewUser) {
-        user = UserModel(
+      if (userCredentials.additionalUserInfo!.isNewUser) {
+        userModel = UserModel(
             loginDate: DateTime.now(),
-            name: userCredential.user!.displayName ?? 'No name',
-            profile: userCredential.user!.photoURL ?? '',
-            phone: '',
-            email: userCredential.user!.email ?? 'no email',
-            uid: userCredential.user!.uid);
+            name: userCredentials.user!.displayName ?? 'No name',
+            profile: userCredentials.user!.photoURL ?? '',
+            phone: userCredentials.user!.phoneNumber ?? '',
+            email: userCredentials.user!.email ?? 'no email',
+            uid: userCredentials.user!.uid,
+            lastLogged: DateTime.now(),
+            label: '');
+        _users
+            .doc(userCredentials.user!.uid.toString())
+            .set(userModel!.toJson());
+        var dataa =
+            await _users.doc(userCredentials.user!.uid.toString()).get();
+        var ref = dataa.reference;
+        var copy = userModel!.copyWith(ref: ref);
+        userModel = copy;
+        _users.doc(userCredentials.user!.uid.toString()).update(copy!.toJson());
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString("uid", userCredentials.user!.uid.toString());
       } else {
-        user = await getuser(uid: userCredential.user!.uid);
+        userModel = await getUser(uid: userCredentials.user!.uid);
+        userModel!.copyWith(lastLogged: DateTime.now());
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString("uid", userCredentials.user!.uid.toString());
       }
-      return right(user);
+      return right(userModel!);
     } on FirebaseException catch (e) {
       throw e.message!;
     } catch (e) {
@@ -51,11 +75,34 @@ class LoginRepository {
     }
   }
 
-  Future<UserModel> getuser({required String uid}) async {
+  Future<UserModel> getUser({required String uid}) async {
     var doc = await _firestore
         .collection(FirebaseConstants.usersCollections)
         .doc(uid)
         .get();
     return UserModel.fromJson(doc.data() as Map<String, dynamic>);
+  }
+
+  Future<void> logOut() async {
+    await _googleSignIn.signOut();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("uid");
+  }
+
+  FutureEither<UserModel> updateUserData({required UserModel userData}) async {
+    try {
+      await _users.doc(userData.uid.toString()).update(userData.toJson());
+      var Data = userData;
+      return right(Data);
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(fail: e.toString()));
+    }
+  }
+
+  Stream<UserModel> getUserData() {
+    return _users.doc(userModel!.uid.toString()).snapshots().map(
+        (event) => UserModel.fromJson(event.data() as Map<String, dynamic>));
   }
 }

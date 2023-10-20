@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
-import 'package:kalpaka_app/features/staff/add_staff.dart';
-import 'package:kalpaka_app/features/staff/view_staff.dart';
+import 'package:kalpaka_app/features/staff/Screen/add_staff.dart';
+import 'package:kalpaka_app/features/staff/Screen/view_staff.dart';
 
-import '../../core/global_variables/global_variables.dart';
+import '../../../core/global_variables/global_variables.dart';
 
 class StaffScreen extends StatefulWidget {
   const StaffScreen({super.key});

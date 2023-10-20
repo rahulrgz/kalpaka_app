@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
 
-import '../../core/global_variables/global_variables.dart';
+import '../../../core/global_variables/global_variables.dart';
 
 class ViewStaff extends StatefulWidget {
   const ViewStaff({super.key});

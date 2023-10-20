@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kalpaka_app/features/staff/controller/staffController.dart';
 
-import '../../core/global_variables/global_variables.dart';
-import '../../core/theme/pallete.dart';
+import '../../../core/commons/utils.dart';
+import '../../../core/global_variables/global_variables.dart';
+import '../../../core/theme/pallete.dart';
 
 class AddStaff extends StatefulWidget {
   const AddStaff({super.key});
@@ -313,14 +316,34 @@ class _AddStaffState extends State<AddStaff> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.grey.shade700,
-        foregroundColor: Pallete.whiteColor,
-        onPressed: () {},
-        label: Text(
-          'Add Staff',
-          style: TextStyle(fontSize: h * 0.017),
-        ),
+      floatingActionButton: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          return FloatingActionButton.extended(
+            backgroundColor: Colors.grey.shade700,
+            foregroundColor: Pallete.whiteColor,
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                ref.read(staffControllerProvider.notifier).addStaff(
+                      context: context,
+                      name: name.text.trim(),
+                      phone: number.text.trim(),
+                      age: age.text.trim(),
+                      place: place.text.trim(),
+                      salary: salary.text.trim(),
+                      profile: _pickedImage.toString(),
+                    );
+              } else {
+                showSnackBar(
+                    context: context,
+                    content: "please provide complete-details");
+              }
+            },
+            label: Text(
+              'Add Staff',
+              style: TextStyle(fontSize: h * 0.017),
+            ),
+          );
+        },
       ),
     );
   }

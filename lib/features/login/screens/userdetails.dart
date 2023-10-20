@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/features/home/bottomnavbar_page.dart';
+import 'package:kalpaka_app/model/usermodel.dart';
 
 import '../../../core/constants/asset_constants/asset_constants.dart';
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
+import '../controller/login_controller.dart';
 
 class UserDetails extends StatefulWidget {
   const UserDetails({super.key});
@@ -17,6 +20,24 @@ class _UserDetailsState extends State<UserDetails> {
   TextEditingController uname = TextEditingController();
   TextEditingController unumber = TextEditingController();
   TextEditingController ulabel = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    uname = TextEditingController(text: userModel!.name);
+    unumber = TextEditingController(text: userModel!.phone);
+    ulabel = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    uname.dispose();
+    unumber.dispose();
+    ulabel.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,39 +202,45 @@ class _UserDetailsState extends State<UserDetails> {
                     SizedBox(
                       height: h * 0.05,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const BottomNav(),
+                    Consumer(
+                      builder:
+                          (BuildContext context, WidgetRef ref, Widget? child) {
+                        return GestureDetector(
+                          onTap: () {
+                            ref
+                                .read(loginControllerProvider.notifier)
+                                .updateUserData(
+                                    userName: uname.text.trim(),
+                                    phoneNUmber: unumber.text.trim(),
+                                    label: ulabel.text.trim(),
+                                    context: context);
+                          },
+                          child: Container(
+                            height: h * 0.056,
+                            width: w * 0.35,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Pallete.shadowColor,
+                                    blurRadius: 1,
+                                    spreadRadius: 1,
+                                    offset: Offset(0, 0)),
+                              ],
+                              color: Pallete.secondaryColor,
+                              borderRadius: BorderRadius.circular(h * 0.018),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Update',
+                                style: TextStyle(
+                                    fontSize: w * 0.035,
+                                    color: Pallete.whiteColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         );
                       },
-                      child: Container(
-                        height: h * 0.056,
-                        width: w * 0.35,
-                        decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Pallete.shadowColor,
-                                blurRadius: 1,
-                                spreadRadius: 1,
-                                offset: Offset(0, 0)),
-                          ],
-                          color: Pallete.secondaryColor,
-                          borderRadius: BorderRadius.circular(h * 0.018),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Update',
-                            style: TextStyle(
-                                fontSize: w * 0.035,
-                                color: Pallete.whiteColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
                     )
                   ],
                 ),

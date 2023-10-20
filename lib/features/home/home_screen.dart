@@ -6,9 +6,9 @@ import 'package:kalpaka_app/features/document/document_screen.dart';
 import 'package:kalpaka_app/features/orders/add_order.dart';
 import 'package:kalpaka_app/features/orders/order_screen.dart';
 import 'package:kalpaka_app/features/profile/profile_screen.dart';
-import 'package:kalpaka_app/features/staff/add_staff.dart';
-import 'package:kalpaka_app/features/staff/office_staff.dart';
-import 'package:kalpaka_app/features/staff/staff_page.dart';
+import 'package:kalpaka_app/features/staff/Screen/add_staff.dart';
+import 'package:kalpaka_app/features/staff/Screen/office_staff.dart';
+import 'package:kalpaka_app/features/staff/Screen/staff_page.dart';
 
 import '../../core/global_variables/global_variables.dart';
 import '../analysis/screen/analysis_screen.dart';

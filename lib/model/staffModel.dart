@@ -1,58 +1,54 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-UserModel? userModel;
-
-class UserModel {
-  DateTime loginDate;
+class StaffModel {
+  DateTime? addedDate;
   String name;
   String profile;
-  String email;
+  String place;
   String phone;
   String uid;
   DocumentReference? ref;
-  DateTime? lastLogged;
-  String? label;
+  String? age;
+  String? salary;
 
-  UserModel({
-    required this.loginDate,
+  StaffModel({
+    required this.addedDate,
     required this.name,
     required this.profile,
     required this.phone,
-    required this.email,
+    required this.place,
     required this.uid,
-    required this.label,
+    required this.salary,
     this.ref,
-    required this.lastLogged,
+    required this.age,
   });
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      loginDate: json['loginDate'] == null
+  factory StaffModel.fromJson(Map<String, dynamic> json) => StaffModel(
+      addedDate: json['addedDate'] == null
           ? DateTime.now()
-          : json['loginDate'].toDate(),
+          : json['addedDate'].toDate(),
       name: json["name"] ?? '',
       profile: json["profile"] ?? '',
-      email: json["email"] ?? '',
+      place: json["place"] ?? '',
       phone: json["phone"] ?? '',
       uid: json["uid"] ?? '',
-      label: json["labl"] ?? "",
-      lastLogged: json['lastLogged'] == null
-          ? DateTime.now()
-          : json['lastLogged'].toDate(),
+      salary: json["salary"] ?? "",
+      age: json['age'] == null ? DateTime.now() : json['age'].toDate(),
       ref: json["ref"]);
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data["loginDate"] = loginDate;
+    data["addedDate"] = addedDate;
     data["name"] = name;
     data["profile"] = profile;
     data["phone"] = phone;
-    data["email"] = email;
+    data["place"] = place;
     data["uid"] = uid;
     data["ref"] = ref;
-    data["lastLogged"] = lastLogged;
-    data["label"] = label;
+    data["age"] = age;
+    data["salary"] = salary;
     return data;
   }
 
-  UserModel copyWith({
+  StaffModel copyWith({
     DateTime? loginDate,
     String? name,
     String? profile,
@@ -60,18 +56,18 @@ class UserModel {
     String? email,
     String? uid,
     DocumentReference? ref,
-    DateTime? lastLogged,
+    String? age,
     String? label,
   }) =>
-      UserModel(
-        loginDate: loginDate ?? this.loginDate,
+      StaffModel(
+        addedDate: loginDate ?? this.addedDate,
         name: name ?? this.name,
         profile: profile ?? this.profile,
-        email: email ?? this.email,
+        place: email ?? this.place,
         uid: uid ?? this.uid,
         phone: phone ?? this.phone,
         ref: ref ?? this.ref,
-        label: label ?? this.label,
-        lastLogged: lastLogged ?? this.lastLogged,
+        salary: label ?? this.salary,
+        age: age ?? this.age,
       );
 }
