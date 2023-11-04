@@ -31,4 +31,10 @@ class StaffRepository {
       return left(Failure(fail: e.toString()));
     }
   }
+
+  Stream<List<StaffModel>> getStaffs() {
+    return _staff.snapshots().map((event) => event.docs
+        .map((e) => StaffModel.fromJson(e.data() as Map<String, dynamic>))
+        .toList());
+  }
 }

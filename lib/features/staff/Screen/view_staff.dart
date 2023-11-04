@@ -2,12 +2,13 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
+import 'package:kalpaka_app/model/staffModel.dart';
 
 import '../../../core/global_variables/global_variables.dart';
 
 class ViewStaff extends StatefulWidget {
-  const ViewStaff({super.key});
-
+  ViewStaff({super.key, required this.singleStaff});
+  StaffModel singleStaff;
   @override
   State<ViewStaff> createState() => _ViewStaffState();
 }
@@ -118,8 +119,8 @@ class _ViewStaffState extends State<ViewStaff> {
                   ),
                   CircleAvatar(
                     radius: h * 0.025,
-                    foregroundImage: const NetworkImage(
-                        'https://rahulrgz.github.io/rahul/assets/img/profile-img.png'),
+                    foregroundImage:
+                        NetworkImage(widget.singleStaff.profile.toString()),
                   ),
                   SizedBox(
                     width: w * 0.025,
@@ -129,14 +130,14 @@ class _ViewStaffState extends State<ViewStaff> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'RAHUL RAMESH',
+                        widget.singleStaff.name,
                         style: TextStyle(
                             fontSize: h * 0.02,
                             color: Pallete.darkColor,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '+91 9744930917',
+                        widget.singleStaff.phone,
                         style: TextStyle(
                             fontSize: h * 0.015, color: Pallete.darkColor),
                       ),
@@ -165,6 +166,7 @@ class _ViewStaffState extends State<ViewStaff> {
                   initialDate: DateTime.now(),
                   onDateChange: (selectedDate) {
                     //`selectedDate` the new date selected.
+                    print(selectedDate);
                   },
                   activeColor: const Color(0xffFFBF9B),
                   headerProps: const EasyHeaderProps(

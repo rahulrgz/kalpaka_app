@@ -32,7 +32,7 @@ class StaffModel {
       phone: json["phone"] ?? '',
       uid: json["uid"] ?? '',
       salary: json["salary"] ?? "",
-      age: json['age'] == null ? DateTime.now() : json['age'].toDate(),
+      age: json['age'],
       ref: json["ref"]);
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

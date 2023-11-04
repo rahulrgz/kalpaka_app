@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kalpaka_app/features/document/controller/documentController.dart';
 
-import '../../core/global_variables/global_variables.dart';
-import '../../core/theme/pallete.dart';
+import '../../../core/global_variables/global_variables.dart';
+import '../../../core/theme/pallete.dart';
 
 class AddDocument extends StatefulWidget {
   const AddDocument({super.key});
@@ -15,7 +18,23 @@ class AddDocument extends StatefulWidget {
 
 class _AddDocumentState extends State<AddDocument> {
   PlatformFile? selectedFile;
+  var url = '';
   TextEditingController description = TextEditingController();
+  Future<String> getUrl({required result}) async {
+    String downloadURL = '';
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('Document/${result.files.first.name}');
+
+    UploadTask uploadTask =
+        storageReference.putFile(File(result.files.first.path));
+
+    await uploadTask.whenComplete(() async {
+      // File uploaded, now get the download URL
+      downloadURL = await storageReference.getDownloadURL();
+    });
+    return downloadURL;
+  }
 
   Future<void> pickFile() async {
     try {
@@ -24,6 +43,7 @@ class _AddDocumentState extends State<AddDocument> {
       );
 
       if (result != null) {
+        url = await getUrl(result: result);
         setState(() {
           selectedFile = result.files.first;
         });
@@ -41,6 +61,8 @@ class _AddDocumentState extends State<AddDocument> {
 
   @override
   Widget build(BuildContext context) {
+    print("/////");
+    print(url);
     return Scaffold(
       backgroundColor: Pallete.whiteColor,
       appBar: AppBar(
@@ -164,14 +186,23 @@ class _AddDocumentState extends State<AddDocument> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.grey.shade700,
-        foregroundColor: Pallete.whiteColor,
-        onPressed: () {},
-        label: Text(
-          'Upload File',
-          style: TextStyle(fontSize: h * 0.017),
-        ),
+      floatingActionButton: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          return FloatingActionButton.extended(
+            backgroundColor: Colors.grey.shade700,
+            foregroundColor: Pallete.whiteColor,
+            onPressed: () {
+              ref.read(documentControllerProvider.notifier).uploadDocument(
+                  url: url,
+                  description: description.text.trim(),
+                  context: context);
+            },
+            label: Text(
+              'Upload File',
+              style: TextStyle(fontSize: h * 0.017),
+            ),
+          );
+        },
       ),
     );
   }

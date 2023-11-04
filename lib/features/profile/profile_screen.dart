@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kalpaka_app/features/document/document_screen.dart';
+import 'package:kalpaka_app/features/document/screen/document_screen.dart';
 import 'package:kalpaka_app/features/login/controller/login_controller.dart';
-import 'package:kalpaka_app/features/orders/order_screen.dart';
+import 'package:kalpaka_app/features/orders/screen/order_screen.dart';
 import 'package:kalpaka_app/features/staff/Screen/staff_page.dart';
 
 import '../../core/commons/error.dart';

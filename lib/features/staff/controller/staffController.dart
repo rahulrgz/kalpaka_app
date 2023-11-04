@@ -5,6 +5,8 @@ import 'package:kalpaka_app/model/staffModel.dart';
 import '../../../core/commons/utils.dart';
 import '../repository/staffRepository.dart';
 
+final getStaffProvider = StreamProvider(
+    (ref) => ref.watch(staffControllerProvider.notifier).getStaffs());
 final staffControllerProvider = StateNotifierProvider((ref) {
   return StaffController(
       staffRepository: ref.read(staffRepositoryProvider), ref: ref);
@@ -40,5 +42,9 @@ class StaffController extends StateNotifier<bool> {
       showSnackBar(context: context, content: "Staff Added Successfully");
       Navigator.pop(context);
     });
+  }
+
+  Stream<List<StaffModel>> getStaffs() {
+    return _staffRepository.getStaffs();
   }
 }

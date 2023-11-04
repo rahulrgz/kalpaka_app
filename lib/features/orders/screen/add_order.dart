@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
 
-import '../../core/global_variables/global_variables.dart';
+import '../../../core/global_variables/global_variables.dart';
+import '../controller/oredercontroller.dart';
 
 class AddOrder extends StatefulWidget {
   const AddOrder({super.key});
@@ -21,16 +24,60 @@ class _AddOrderState extends State<AddOrder> {
   TextEditingController cnumber = TextEditingController();
   TextEditingController phnumber = TextEditingController();
   TextEditingController adddetails = TextEditingController();
+  TextEditingController vNumber = TextEditingController();
+  void addOrder(
+      {required String cname,
+      required String vmodel,
+      required String enumber,
+      required String cnumber,
+      required String phnumber,
+      required String adddetails,
+      required String img,
+      required BuildContext ctx,
+      required String vnumber,
+      required WidgetRef ref}) {
+    ref.read(orderControllerProvider.notifier).addOrder(
+        cname: cname,
+        vmodel: vmodel,
+        enumber: enumber,
+        cnumber: cnumber,
+        phnumber: phnumber,
+        adddetails: adddetails,
+        img: img,
+        ctx: context,
+        vNumber: vnumber);
+  }
+
   final _formKey = GlobalKey<FormState>();
   XFile? _pickedImage;
+  String? _pickedImagePath;
+  Future<String> uploadImageToFirebase(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      firebase_storage.Reference firebaseStorageRef =
+          firebase_storage.FirebaseStorage.instance.ref().child(fileName);
+      firebase_storage.UploadTask uploadTask =
+          firebaseStorageRef.putFile(imageFile);
+      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+      String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print(e.toString());
+      return '';
+    }
+  }
 
   Future<void> _pickImagecam() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
+      File file = File(pickedFile.path);
+      String downloadUrl = await uploadImageToFirebase(file);
+
       setState(() {
         _pickedImage = pickedFile;
+        _pickedImagePath = downloadUrl;
       });
       Navigator.pop(context);
     } else {
@@ -48,8 +95,12 @@ class _AddOrderState extends State<AddOrder> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
+      File file = File(pickedFile.path);
+      String downloadUrl = await uploadImageToFirebase(file);
+
       setState(() {
         _pickedImage = pickedFile;
+        _pickedImagePath = downloadUrl;
       });
       Navigator.pop(context);
     } else {
@@ -175,6 +226,34 @@ class _AddOrderState extends State<AddOrder> {
                         controller: vmodel,
                         decoration: InputDecoration(
                             hintText: 'Vehicle Model',
+                            hintStyle: TextStyle(fontSize: h * 0.02),
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: h * 0.02),
+                  child: Container(
+                    height: h * 0.06,
+                    decoration: BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Pallete.shadowColor,
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            offset: Offset(0, 0)),
+                      ],
+                      color: Pallete.whiteColor,
+                      borderRadius: BorderRadius.circular(h * 0.02),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: h * 0.02, right: h * 0.02),
+                      child: TextFormField(
+                        controller: vNumber,
+                        decoration: InputDecoration(
+                            hintText: 'Vehicle NUmber',
                             hintStyle: TextStyle(fontSize: h * 0.02),
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none),
@@ -362,14 +441,30 @@ class _AddOrderState extends State<AddOrder> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.grey.shade700,
-        foregroundColor: Pallete.whiteColor,
-        onPressed: () {},
-        label: Text(
-          'Confirm Order',
-          style: TextStyle(fontSize: h * 0.017),
-        ),
+      floatingActionButton: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          return FloatingActionButton.extended(
+            backgroundColor: Colors.grey.shade700,
+            foregroundColor: Pallete.whiteColor,
+            onPressed: () {
+              addOrder(
+                  cname: cname.text.trim(),
+                  vmodel: vmodel.text.trim(),
+                  enumber: enumber.text.trim(),
+                  cnumber: cnumber.text.trim(),
+                  phnumber: phnumber.text.trim(),
+                  adddetails: adddetails.text.trim(),
+                  img: _pickedImagePath.toString(),
+                  ref: ref,
+                  ctx: context,
+                  vnumber: vNumber.text.trim());
+            },
+            label: Text(
+              'Confirm Order',
+              style: TextStyle(fontSize: h * 0.017),
+            ),
+          );
+        },
       ),
     );
   }

@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
 
-import '../../core/global_variables/global_variables.dart';
+import '../../../core/global_variables/global_variables.dart';
+import '../../../model/orderModel.dart';
 
 class ViewOrderScreen extends StatefulWidget {
-  const ViewOrderScreen({super.key});
-
+  ViewOrderScreen({super.key, required this.singleOrder});
+  OrderModel singleOrder;
   @override
   State<ViewOrderScreen> createState() => _ViewOrderScreenState();
 }
@@ -140,7 +141,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                     width: h * 0.15,
                     color: Colors.red,
                     child: Image.network(
-                      'https://scontent.fcok4-1.fna.fbcdn.net/v/t1.6435-9/122314289_180909316906067_4725046546716825343_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=ImuiRPnECwcAX9l4IEN&_nc_ht=scontent.fcok4-1.fna&oh=00_AfCYwah78HnlPyk8zhAZOXrxuz1CMEWeBNBMrm8Hv3bygw&oe=6544A4F2',
+                      widget.singleOrder.img,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -150,7 +151,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Eicher 2048 XP',
+                        widget.singleOrder.vModel.toString(),
                         style: TextStyle(
                             fontSize: h * 0.024,
                             color: Pallete.darkColor,
@@ -164,7 +165,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         ),
                       ),
                       Text(
-                        'Customer: Rahul Ramesh',
+                        'Customer: ${widget.singleOrder.customerName.toString()}',
                         style: TextStyle(
                           fontSize: h * 0.015,
                           color: Pallete.darkColor,
@@ -184,7 +185,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
               children: [
                 SizedBox(width: w * 0.08),
                 Text(
-                  'Customer Name : ',
+                  'Customer Name : ${widget.singleOrder.customerName.toString()}',
                   style: TextStyle(
                     fontSize: h * 0.018,
                     color: Pallete.darkColor,
@@ -217,7 +218,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   ),
                 ),
                 Text(
-                  '8858484848',
+                  ' ${widget.singleOrder.vModel.toString()}',
                   style: TextStyle(
                     fontSize: h * 0.02,
                     fontWeight: FontWeight.w600,
@@ -243,7 +244,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   ),
                 ),
                 Text(
-                  'Eicher 2048 XP',
+                  widget.singleOrder.vModel.toString(),
                   style: TextStyle(
                     fontSize: h * 0.02,
                     fontWeight: FontWeight.w600,
@@ -268,7 +269,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   ),
                 ),
                 Text(
-                  'Eicher 2048 XP',
+                  widget.singleOrder.vModel.toString(),
                   style: TextStyle(
                     fontSize: h * 0.02,
                     fontWeight: FontWeight.w600,
@@ -294,7 +295,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   ),
                 ),
                 Text(
-                  'Eicher 2048 XP',
+                  widget.singleOrder.customerNumber.toString(),
                   style: TextStyle(
                     fontSize: h * 0.02,
                     fontWeight: FontWeight.w600,
@@ -320,7 +321,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   ),
                 ),
                 Text(
-                  '204865790876543256789',
+                  widget.singleOrder.engineNumber.toString(),
                   style: TextStyle(
                     fontSize: h * 0.02,
                     fontWeight: FontWeight.w600,
@@ -346,7 +347,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   ),
                 ),
                 Text(
-                  'Eicher8765434567890XP',
+                  widget.singleOrder.chaseNumber.toString(),
                   style: TextStyle(
                     fontSize: h * 0.02,
                     fontWeight: FontWeight.w600,
@@ -372,7 +373,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   ),
                 ),
                 Text(
-                  '29 Sep 2023',
+                  widget.singleOrder.orderDate.toString(),
                   style: TextStyle(
                     fontSize: h * 0.02,
                     fontWeight: FontWeight.w600,

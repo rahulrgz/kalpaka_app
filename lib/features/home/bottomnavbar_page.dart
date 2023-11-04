@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
-import 'package:kalpaka_app/features/document/document_screen.dart';
+import 'package:kalpaka_app/features/document/screen/document_screen.dart';
 import 'package:kalpaka_app/features/staff/Screen/staff_page.dart';
 
-import '../orders/order_screen.dart';
+import '../orders/screen/order_screen.dart';
 import 'home_screen.dart';
 
 class BottomNav extends StatefulWidget {
