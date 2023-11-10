@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
+import 'package:kalpaka_app/features/staff/Screen/currentday_details.dart';
 import 'package:kalpaka_app/model/staffModel.dart';
 
 import '../../../core/global_variables/global_variables.dart';
@@ -14,6 +15,7 @@ class ViewStaff extends StatefulWidget {
 }
 
 class _ViewStaffState extends State<ViewStaff> {
+  bool _updated = true;
   void deleteConfirmBoxMobile(BuildContext context) {
     showDialog(
       context: context,
@@ -27,23 +29,21 @@ class _ViewStaffState extends State<ViewStaff> {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(w * 0.05)),
         actionsPadding: EdgeInsets.only(bottom: h * 0.03),
-        content: SizedBox(
-          height: h * 0.05,
-          width: w * 0.3,
-          child: Column(
-            children: [
-              Text('Are you sure you want to ',
-                  style: TextStyle(
-                      fontSize: h * 0.019,
-                      color: Pallete.whiteColor,
-                      fontWeight: FontWeight.bold)),
-              Text('delete?',
-                  style: TextStyle(
-                      fontSize: h * 0.019,
-                      color: Pallete.whiteColor,
-                      fontWeight: FontWeight.bold)),
-            ],
-          ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: h * 0.03),
+            Text('Are you sure you want to ',
+                style: TextStyle(
+                    fontSize: h * 0.019,
+                    color: Pallete.whiteColor,
+                    fontWeight: FontWeight.bold)),
+            Text('delete?',
+                style: TextStyle(
+                    fontSize: h * 0.019,
+                    color: Pallete.whiteColor,
+                    fontWeight: FontWeight.bold)),
+          ],
         ),
         actions: [
           ElevatedButton(
@@ -210,7 +210,6 @@ class _ViewStaffState extends State<ViewStaff> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: h * 0.1,
                   width: w * 0.4,
                   decoration: BoxDecoration(
                     boxShadow: const [
@@ -226,6 +225,7 @@ class _ViewStaffState extends State<ViewStaff> {
                   child: Padding(
                     padding: EdgeInsets.all(h * 0.02),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -240,10 +240,10 @@ class _ViewStaffState extends State<ViewStaff> {
                         ),
                         Center(
                           child: Text(
-                            'Leave',
+                            _updated ? "Update it" : "Leave",
                             style: TextStyle(
                               fontSize: h * 0.02,
-                              color: Colors.red,
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -252,7 +252,6 @@ class _ViewStaffState extends State<ViewStaff> {
                   ),
                 ),
                 Container(
-                  height: h * 0.1,
                   width: w * 0.4,
                   decoration: BoxDecoration(
                     boxShadow: const [
@@ -268,6 +267,7 @@ class _ViewStaffState extends State<ViewStaff> {
                   child: Padding(
                     padding: EdgeInsets.all(h * 0.02),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -282,7 +282,7 @@ class _ViewStaffState extends State<ViewStaff> {
                         ),
                         Center(
                           child: Text(
-                            '0',
+                            _updated ? "Update it" : '0',
                             style: TextStyle(
                                 fontSize: h * 0.02, color: Pallete.darkColor),
                           ),
@@ -296,90 +296,90 @@ class _ViewStaffState extends State<ViewStaff> {
             SizedBox(
               height: h * 0.037,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  height: h * 0.1,
-                  width: w * 0.4,
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 3,
-                          spreadRadius: 1,
-                          offset: Offset(1, 1))
-                    ],
-                    color: Pallete.whiteColor,
-                    borderRadius: BorderRadius.circular(h * 0.02),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(h * 0.02),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Total Days:',
-                          style: TextStyle(
-                              fontSize: h * 0.015,
-                              color: Pallete.darkColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: h * 0.01,
-                        ),
-                        Center(
-                          child: Text(
-                            '24',
-                            style: TextStyle(
-                                fontSize: h * 0.02, color: Pallete.darkColor),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  height: h * 0.1,
-                  width: w * 0.4,
-                  decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 3,
-                            spreadRadius: 1,
-                            offset: Offset(1, 2))
-                      ],
-                      color: Pallete.whiteColor,
-                      borderRadius: BorderRadius.circular(h * 0.02)),
-                  child: Padding(
-                    padding: EdgeInsets.all(h * 0.02),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Total Credit:',
-                          style: TextStyle(
-                              fontSize: h * 0.015,
-                              color: Pallete.darkColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: h * 0.01,
-                        ),
-                        Center(
-                          child: Text(
-                            '24000',
-                            style: TextStyle(
-                                fontSize: h * 0.02, color: Pallete.darkColor),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   children: [
+            //     Container(
+            //       width: w * 0.4,
+            //       decoration: BoxDecoration(
+            //         boxShadow: const [
+            //           BoxShadow(
+            //               color: Colors.grey,
+            //               blurRadius: 3,
+            //               spreadRadius: 1,
+            //               offset: Offset(1, 1))
+            //         ],
+            //         color: Pallete.whiteColor,
+            //         borderRadius: BorderRadius.circular(h * 0.02),
+            //       ),
+            //       child: Padding(
+            //         padding: EdgeInsets.all(h * 0.02),
+            //         child: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Text(
+            //               'Total Days:',
+            //               style: TextStyle(
+            //                   fontSize: h * 0.015,
+            //                   color: Pallete.darkColor,
+            //                   fontWeight: FontWeight.bold),
+            //             ),
+            //             SizedBox(
+            //               height: h * 0.01,
+            //             ),
+            //             Center(
+            //               child: Text(
+            //                 _updated ? "Update it" : '24',
+            //                 style: TextStyle(
+            //                     fontSize: h * 0.02, color: Pallete.darkColor),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //     Container(
+            //       width: w * 0.4,
+            //       decoration: BoxDecoration(
+            //           boxShadow: const [
+            //             BoxShadow(
+            //                 color: Colors.grey,
+            //                 blurRadius: 3,
+            //                 spreadRadius: 1,
+            //                 offset: Offset(1, 2))
+            //           ],
+            //           color: Pallete.whiteColor,
+            //           borderRadius: BorderRadius.circular(h * 0.02)),
+            //       child: Padding(
+            //         padding: EdgeInsets.all(h * 0.02),
+            //         child: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Text(
+            //               'Total Credit:',
+            //               style: TextStyle(
+            //                   fontSize: h * 0.015,
+            //                   color: Pallete.darkColor,
+            //                   fontWeight: FontWeight.bold),
+            //             ),
+            //             SizedBox(
+            //               height: h * 0.01,
+            //             ),
+            //             Center(
+            //               child: Text(
+            //                 _updated ? "Update it" : '24000',
+            //                 style: TextStyle(
+            //                     fontSize: h * 0.02, color: Pallete.darkColor),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
@@ -387,7 +387,14 @@ class _ViewStaffState extends State<ViewStaff> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Pallete.darkColor,
         foregroundColor: Pallete.whiteColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => CurrentDetailsChange(),
+            ),
+          );
+        },
         icon: Icon(
           CupertinoIcons.time,
           size: h * 0.02,

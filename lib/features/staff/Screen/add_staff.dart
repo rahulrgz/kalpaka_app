@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kalpaka_app/features/staff/controller/staffController.dart';
 
@@ -226,7 +227,7 @@ class _AddStaffState extends State<AddStaff> {
                 Padding(
                   padding: EdgeInsets.only(top: h * 0.02),
                   child: Container(
-                    height: h * 0.06,
+                    height: h * 0.084,
                     decoration: BoxDecoration(
                       boxShadow: const [
                         BoxShadow(
@@ -242,6 +243,8 @@ class _AddStaffState extends State<AddStaff> {
                       padding: EdgeInsets.only(left: h * 0.02, right: h * 0.02),
                       child: TextFormField(
                         controller: number,
+                        keyboardType: TextInputType.phone,
+                        maxLength: 10,
                         decoration: InputDecoration(
                             hintText: 'Enter Number',
                             hintStyle: TextStyle(fontSize: h * 0.02),
@@ -254,7 +257,7 @@ class _AddStaffState extends State<AddStaff> {
                 Padding(
                   padding: EdgeInsets.only(top: h * 0.02),
                   child: Container(
-                    height: h * 0.06,
+                    height: h * 0.084,
                     decoration: BoxDecoration(
                       boxShadow: const [
                         BoxShadow(
@@ -269,6 +272,7 @@ class _AddStaffState extends State<AddStaff> {
                     child: Padding(
                       padding: EdgeInsets.only(left: h * 0.02, right: h * 0.02),
                       child: TextFormField(
+                        maxLength: 2,
                         controller: age,
                         decoration: InputDecoration(
                             hintText: 'Enter Age',
@@ -336,41 +340,76 @@ class _AddStaffState extends State<AddStaff> {
                     ),
                   ),
                 ),
+                SizedBox(height: h * 0.15),
+                Consumer(builder:
+                    (BuildContext context, WidgetRef ref, Widget? child) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ref.read(staffControllerProvider.notifier).addStaff(
+                              context: context,
+                              name: name.text.trim(),
+                              phone: number.text.trim(),
+                              age: age.text.trim(),
+                              place: place.text.trim(),
+                              salary: salary.text.trim(),
+                              profile: _pickedImagePath.toString(),
+                            );
+                      } else {
+                        showSnackBar(
+                            context: context,
+                            content: "please provide complete-details");
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(w * 0.85, h * 0.06),
+                        backgroundColor: Pallete.secondaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(h * 0.15))),
+                    child: Text(
+                      "ADD STAFF",
+                      style: GoogleFonts.urbanist(
+                          fontSize: h * 0.017,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
+                    ),
+                  );
+                }),
               ],
             ),
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Consumer(
-        builder: (BuildContext context, WidgetRef ref, Widget? child) {
-          return FloatingActionButton.extended(
-            backgroundColor: Colors.grey.shade700,
-            foregroundColor: Pallete.whiteColor,
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                ref.read(staffControllerProvider.notifier).addStaff(
-                      context: context,
-                      name: name.text.trim(),
-                      phone: number.text.trim(),
-                      age: age.text.trim(),
-                      place: place.text.trim(),
-                      salary: salary.text.trim(),
-                      profile: _pickedImagePath.toString(),
-                    );
-              } else {
-                showSnackBar(
-                    context: context,
-                    content: "please provide complete-details");
-              }
-            },
-            label: Text(
-              'Add Staff',
-              style: TextStyle(fontSize: h * 0.017),
-            ),
-          );
-        },
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: Consumer(
+      //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
+      //     return FloatingActionButton.extended(
+      //       backgroundColor: Colors.grey.shade700,
+      //       foregroundColor: Pallete.whiteColor,
+      //       onPressed: () {
+      //         if (_formKey.currentState!.validate()) {
+      //           ref.read(staffControllerProvider.notifier).addStaff(
+      //                 context: context,
+      //                 name: name.text.trim(),
+      //                 phone: number.text.trim(),
+      //                 age: age.text.trim(),
+      //                 place: place.text.trim(),
+      //                 salary: salary.text.trim(),
+      //                 profile: _pickedImagePath.toString(),
+      //               );
+      //         } else {
+      //           showSnackBar(
+      //               context: context,
+      //               content: "please provide complete-details");
+      //         }
+      //       },
+      //       label: Text(
+      //         'Add Staff',
+      //         style: TextStyle(fontSize: h * 0.017),
+      //       ),
+      //     );
+      //   },
+      // ),
     );
   }
 }

@@ -26,23 +26,21 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(w * 0.05)),
         actionsPadding: EdgeInsets.only(bottom: h * 0.03),
-        content: SizedBox(
-          height: h * 0.05,
-          width: w * 0.3,
-          child: Column(
-            children: [
-              Text('Are you sure you want to ',
-                  style: TextStyle(
-                      fontSize: h * 0.019,
-                      color: Pallete.whiteColor,
-                      fontWeight: FontWeight.bold)),
-              Text('delete?',
-                  style: TextStyle(
-                      fontSize: h * 0.019,
-                      color: Pallete.whiteColor,
-                      fontWeight: FontWeight.bold)),
-            ],
-          ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: h * 0.03),
+            Text('Are you sure you want to ',
+                style: TextStyle(
+                    fontSize: h * 0.019,
+                    color: Pallete.whiteColor,
+                    fontWeight: FontWeight.bold)),
+            Text('delete?',
+                style: TextStyle(
+                    fontSize: h * 0.019,
+                    color: Pallete.whiteColor,
+                    fontWeight: FontWeight.bold)),
+          ],
         ),
         actions: [
           ElevatedButton(
