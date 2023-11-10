@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart';
 import 'package:kalpaka_app/features/document/controller/documentController.dart';
 import 'package:kalpaka_app/features/document/screen/add_document.dart';
 
@@ -21,12 +22,22 @@ class DocumentScreen extends StatefulWidget {
 }
 
 class _DocumentScreenState extends State<DocumentScreen> {
+  void Download() async {
+    var time = DateTime.now().millisecondsSinceEpoch;
+    var path = "/storage/emulated/0/Download/image-$time.jpg";
+    var file = File(path);
+    var res = await get(Uri.parse("https://source.unsplash.com/random"));
+    file.writeAsBytes(res.bodyBytes);
+  }
+
   void downloadDoc({required String imageUrl}) async {
     try {
       final response = await http.get(Uri.parse(imageUrl));
       if (response.statusCode == 200) {
+        var time = DateTime.now().millisecondsSinceEpoch;
+        var path = "/storage/emulated/0/Download/image-$time.jpg";
         final appDocDir = await getApplicationDocumentsDirectory();
-        final file = File('${appDocDir.path}/image.png');
+        final file = File(path);
         await file.writeAsBytes(response.bodyBytes, flush: true);
 
         print('Image saved to: ${file.path}');
@@ -103,8 +114,8 @@ class _DocumentScreenState extends State<DocumentScreen> {
                                     GestureDetector(
                                       onTap: () {
                                         downloadDoc(
-                                          imageUrl: doc[index].doc,
-                                        );
+                                            imageUrl:
+                                                doc[index].doc.toString());
                                       },
                                       child: Container(
                                         height: h * 0.04,

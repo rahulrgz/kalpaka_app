@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
+import 'package:kalpaka_app/features/document/controller/documentController.dart';
 import 'package:kalpaka_app/features/document/screen/add_document.dart';
 import 'package:kalpaka_app/features/document/screen/document_screen.dart';
 import 'package:kalpaka_app/features/orders/screen/add_order.dart';
@@ -10,12 +11,14 @@ import 'package:kalpaka_app/features/profile/profile_screen.dart';
 import 'package:kalpaka_app/features/staff/Screen/add_staff.dart';
 import 'package:kalpaka_app/features/staff/Screen/office_staff.dart';
 import 'package:kalpaka_app/features/staff/Screen/staff_page.dart';
+import 'package:kalpaka_app/features/staff/controller/staffController.dart';
 
-import '../../core/commons/error.dart';
-import '../../core/commons/loader.dart';
-import '../../core/global_variables/global_variables.dart';
-import '../analysis/screen/analysis_screen.dart';
-import '../login/controller/login_controller.dart';
+import '../../../core/commons/error.dart';
+import '../../../core/commons/loader.dart';
+import '../../../core/global_variables/global_variables.dart';
+import '../../analysis/screen/analysis_screen.dart';
+import '../../login/controller/login_controller.dart';
+import '../homecontroller/homecontroller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -152,11 +155,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ],
                                           ),
                                           SizedBox(height: h * 0.01),
-                                          Text("28",
-                                              style: TextStyle(
-                                                  fontSize: h * 0.04,
-                                                  fontWeight: FontWeight.w800,
-                                                  color: Pallete.darkColor)),
+                                          ref.watch(getStaffProvider).when(
+                                              data: (staff) {
+                                                return Text(
+                                                    staff.length.toString(),
+                                                    style: TextStyle(
+                                                        fontSize: h * 0.04,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        color:
+                                                            Pallete.darkColor));
+                                              },
+                                              error: (error, stackTrace) =>
+                                                  ErrorText(
+                                                      error: error.toString()),
+                                              loading: () => const Loader()),
                                           Text(
                                             "No.of Staff",
                                             style: TextStyle(
@@ -233,11 +246,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ],
                                           ),
                                           SizedBox(height: h * 0.01),
-                                          Text("13",
-                                              style: TextStyle(
-                                                  fontSize: h * 0.04,
-                                                  fontWeight: FontWeight.w800,
-                                                  color: Pallete.darkColor)),
+                                          ref.watch(getDocumentsProvider).when(
+                                              data: (doc) {
+                                                return Text(
+                                                    doc.length.toString(),
+                                                    style: TextStyle(
+                                                        fontSize: h * 0.04,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        color:
+                                                            Pallete.darkColor));
+                                              },
+                                              error: (error, stackTrace) =>
+                                                  ErrorText(
+                                                      error: error.toString()),
+                                              loading: () => const Loader()),
                                           Text(
                                             "No.of Documents",
                                             style: TextStyle(
@@ -835,45 +858,65 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     SizedBox(
                                       height: h * 0.11,
-                                      child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: 4,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: h * 0.02),
-                                              child: SizedBox(
-                                                height: h * 0.1,
-                                                width: w * 0.16,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    CircleAvatar(
-                                                      radius: h * 0.027,
+                                      child: ref.watch(allUsrProvider).when(
+                                          data: (users) {
+                                            return ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: users.length,
+                                                itemBuilder: (context, index) {
+                                                  return Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: h * 0.02),
+                                                    child: SizedBox(
+                                                      height: h * 0.1,
+                                                      width: w * 0.16,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          CircleAvatar(
+                                                            radius: h * 0.027,
+                                                            backgroundImage:
+                                                                NetworkImage(users[
+                                                                        index]
+                                                                    .profile
+                                                                    .toString()),
+                                                          ),
+                                                          SizedBox(
+                                                            height: h * 0.01,
+                                                          ),
+                                                          Text(
+                                                            users[index]
+                                                                .name
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    h * 0.015,
+                                                                color: Pallete
+                                                                    .darkColor),
+                                                          ),
+                                                          Text(
+                                                            users[index]
+                                                                .label
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    h * 0.01,
+                                                                color: Pallete
+                                                                    .darkColor),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                    SizedBox(
-                                                      height: h * 0.01,
-                                                    ),
-                                                    Text(
-                                                      'Rahul ',
-                                                      style: TextStyle(
-                                                          fontSize: h * 0.015,
-                                                          color: Pallete
-                                                              .darkColor),
-                                                    ),
-                                                    Text(
-                                                      'Owner',
-                                                      style: TextStyle(
-                                                          fontSize: h * 0.01,
-                                                          color: Pallete
-                                                              .darkColor),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }),
+                                                  );
+                                                });
+                                          },
+                                          error: (error, stackTrace) =>
+                                              ErrorText(
+                                                  error: error.toString()),
+                                          loading: () => const Loader()),
                                     ),
                                   ],
                                 ),

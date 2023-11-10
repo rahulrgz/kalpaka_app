@@ -8,7 +8,7 @@ class OrderModel {
   String? vModel;
   String? engineNumber;
   String? uid;
-  String? ref;
+  DocumentReference? ref;
   String? chaseNumber;
   String img;
   String? aduttionalDetails;
@@ -67,7 +67,7 @@ class OrderModel {
     String? vModel,
     String? engineNumber,
     String? uid,
-    String? ref,
+    DocumentReference? ref,
     String? chaseNumber,
     String? aduttionalDetails,
     String? img,

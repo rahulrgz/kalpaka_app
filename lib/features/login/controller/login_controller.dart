@@ -5,7 +5,7 @@ import 'package:kalpaka_app/features/login/screens/userdetails.dart';
 import 'package:kalpaka_app/model/usermodel.dart';
 
 import '../../../core/commons/utils.dart';
-import '../../home/bottomnavbar_page.dart';
+import '../../home/screen/bottomnavbar_page.dart';
 import '../screens/login_screen.dart';
 
 final getUserDataProvider = StreamProvider(

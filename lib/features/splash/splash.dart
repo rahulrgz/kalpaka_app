@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/global_variables/global_variables.dart';
 import '../../core/theme/pallete.dart';
 import '../../model/usermodel.dart';
-import '../home/bottomnavbar_page.dart';
+import '../home/screen/bottomnavbar_page.dart';
 import '../login/controller/login_controller.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {

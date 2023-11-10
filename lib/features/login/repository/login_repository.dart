@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/firebase_providers.dart';
 
+String? currentUserId;
 final loginRepositoryProvider = Provider((ref) => LoginRepository(
     firestore: ref.read(firestoreProvider),
     auth: ref.read(authProvider),
@@ -50,6 +51,7 @@ class LoginRepository {
             uid: userCredentials.user!.uid,
             lastLogged: DateTime.now(),
             label: '');
+        currentUserId = userCredentials.user!.uid;
         _users
             .doc(userCredentials.user!.uid.toString())
             .set(userModel!.toJson());
@@ -63,6 +65,7 @@ class LoginRepository {
         prefs.setString("uid", userCredentials.user!.uid.toString());
       } else {
         userModel = await getUser(uid: userCredentials.user!.uid);
+        currentUserId = userModel?.uid;
         userModel!.copyWith(lastLogged: DateTime.now());
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString("uid", userCredentials.user!.uid.toString());
