@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
+import 'package:kalpaka_app/features/orders/screen/update_order.dart';
+import 'package:scroll_page_view/pager/page_controller.dart';
+import 'package:scroll_page_view/pager/scroll_page_view.dart';
 
 import '../../../core/global_variables/global_variables.dart';
 import '../../../model/orderModel.dart';
@@ -13,6 +18,14 @@ class ViewOrderScreen extends StatefulWidget {
 }
 
 class _ViewOrderScreenState extends State<ViewOrderScreen> {
+  static const _images = [
+    'https://i.pravatar.cc/150?img=1',
+    'https://i.pravatar.cc/150?img=2',
+    'https://i.pravatar.cc/150?img=3',
+    'https://i.pravatar.cc/150?img=4',
+    'https://i.pravatar.cc/150?img=5',
+  ];
+
   void deleteConfirmBoxMobile(BuildContext context) {
     showDialog(
       context: context,
@@ -87,7 +100,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
     return Scaffold(
       backgroundColor: Pallete.whiteColor,
       appBar: AppBar(
-        backgroundColor: Pallete.containerColor,
+        backgroundColor: Pallete.whiteColor,
         // centerTitle: true,
         elevation: 0,
         leading: IconButton(
@@ -102,7 +115,14 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => UpdateOrder(),
+                ),
+              );
+            },
             icon: Icon(
               CupertinoIcons.pencil_ellipsis_rectangle,
               size: h * 0.025,
@@ -124,322 +144,304 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: h * 0.2,
+              height: h * 0.4,
               width: w,
               color: Pallete.containerColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
+              child: Stack(
                 children: [
-                  SizedBox(width: w * 0.05),
-                  Container(
-                    height: h * 0.15,
-                    width: h * 0.15,
-                    color: Colors.red,
-                    child: Image.network(
-                      widget.singleOrder.img,
-                      fit: BoxFit.cover,
-                    ),
+                  ScrollPageView(
+                    delay: const Duration(seconds: 6),
+                    controller: ScrollPageController(),
+                    allowImplicitScrolling: false,
+                    clipBehavior: Clip.none,
+                    reverse: false,
+                    indicatorColor: Colors.transparent,
+                    checkedIndicatorColor: Colors.transparent,
+                    children:
+                        _images.map((image) => _imageView(image)).toList(),
                   ),
-                  SizedBox(width: w * 0.02),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        widget.singleOrder.vModel.toString(),
-                        style: TextStyle(
-                            fontSize: h * 0.024,
-                            color: Pallete.darkColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Pending',
-                        style: TextStyle(
-                          fontSize: h * 0.012,
-                          color: Colors.red,
+                      SizedBox(width: w * 0.05),
+                      Container(
+                        height: h * 0.15,
+                        width: h * 0.15,
+                        color: Colors.red,
+                        child: Image.network(
+                          widget.singleOrder.img,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      Text(
-                        'Customer: ${widget.singleOrder.customerName.toString()}',
-                        style: TextStyle(
-                          fontSize: h * 0.015,
-                          color: Pallete.darkColor,
-                        ),
-                      ),
-                      SizedBox(height: w * 0.02),
+                      SizedBox(width: w * 0.02),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.singleOrder.vModel.toString(),
+                            style: TextStyle(
+                                fontSize: h * 0.024,
+                                color: Pallete.darkColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Work in progress',
+                            style: TextStyle(
+                              fontSize: h * 0.012,
+                              color: Colors.red,
+                            ),
+                          ),
+                          Text(
+                            'Customer: ${widget.singleOrder.customerName.toString()}',
+                            style: TextStyle(
+                              fontSize: h * 0.015,
+                              color: Pallete.darkColor,
+                            ),
+                          ),
+                          SizedBox(height: w * 0.02),
+                        ],
+                      )
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-            SizedBox(
-              height: h * 0.045,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Customer Name : ${widget.singleOrder.customerName.toString()}',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+            SizedBox(height: h * 0.045),
+            Padding(
+              padding: EdgeInsets.fromLTRB(w * 0.05, 0, 0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Customer Name :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  ' ',
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.customerName.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-
-            Divider(thickness: w * 0.001),
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Customer Number : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Vehicle Name :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  ' ${widget.singleOrder.vModel.toString()}',
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.vModel.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Vehicle Name : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Vehicle Model :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  widget.singleOrder.vModel.toString(),
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.vModel.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Vehicle Model : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Vehicle Number :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  widget.singleOrder.vModel.toString(),
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.vNumber.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Vehicle Number : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Customer Number :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  widget.singleOrder.customerNumber.toString(),
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.customerNumber.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Engine Number : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Engine Number :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  widget.singleOrder.engineNumber.toString(),
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.engineNumber.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Chase Number : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Chase Number :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  widget.singleOrder.chaseNumber.toString(),
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.chaseNumber.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Order Date : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Order Date :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  widget.singleOrder.orderDate.toString(),
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    widget.singleOrder.orderDate.toString(),
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Estimate Delivery : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.015),
+                  Text(
+                    'Estimate Delivery :',
+                    style: GoogleFonts.urbanist(
+                      textStyle: TextStyle(
+                        fontSize: h * 0.015,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-                Text(
-                  '1 Dec 2023',
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
+                  Text(
+                    '1 Dec 2023',
+                    style: GoogleFonts.urbanist(
+                      fontSize: h * 0.02,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(thickness: w * 0.001),
-
-            SizedBox(
-              height: h * 0.015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: w * 0.08),
-                Text(
-                  'Current Stage : ',
-                  style: TextStyle(
-                    fontSize: h * 0.018,
-                    color: Pallete.darkColor,
+                  SizedBox(height: h * 0.01),
+                  SizedBox(
+                    height: h * 0.015,
                   ),
-                ),
-                Text(
-                  'Work in Progress',
-                  style: TextStyle(
-                    fontSize: h * 0.02,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.darkColor,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Divider(thickness: w * 0.001),
-
-            // SizedBox(
-            //   height: h * 0.015,
-            // ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(w * 0.04, 0, w * 0.05, 0),
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 5,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.network(
+                        'https://images.pexels.com/photos/2899097/pexels-photo-2899097.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: h * 0.01),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Back body updated',
+                          style: GoogleFonts.urbanist(
+                            textStyle: TextStyle(
+                              fontSize: h * 0.018,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          DateFormat('d MMM y - hh:mm a')
+                              .format(DateTime.now()),
+                          style: GoogleFonts.urbanist(
+                            textStyle: TextStyle(
+                              fontSize: h * 0.013,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: h * 0.02)
+                    ],
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: h * 0.07)
           ],
         ),
       ),
+    );
+  }
+
+  Widget _imageView(String image) {
+    return ClipRRect(
+      clipBehavior: Clip.none,
+      child: Image.network(image, fit: BoxFit.cover),
     );
   }
 }

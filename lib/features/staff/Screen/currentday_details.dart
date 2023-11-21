@@ -52,7 +52,7 @@ class _CurrentDetailsChangeState extends State<CurrentDetailsChange> {
                   child: DropdownButton2<String>(
                     isExpanded: true,
                     hint: Text(
-                      'Over Time',
+                      'Attendance',
                       style: GoogleFonts.urbanist(
                           fontWeight: FontWeight.w400,
                           color: Pallete.secondaryColor,
@@ -115,7 +115,7 @@ class _CurrentDetailsChangeState extends State<CurrentDetailsChange> {
                   child: DropdownButton2<String>(
                     isExpanded: true,
                     hint: Text(
-                      'Attendance',
+                      'Over Time',
                       style: GoogleFonts.urbanist(
                           fontWeight: FontWeight.w400,
                           color: Pallete.secondaryColor,

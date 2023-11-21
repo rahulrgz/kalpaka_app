@@ -12,7 +12,28 @@
           "package_name": "com.sra.kalpaka_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "523118989857-f0u50upeckjgekklvlmo1frpnqsp6fc4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sra.kalpaka_app",
+            "certificate_hash": "417719f8c0ac112095f3993da4da6b4396ed46ae"
+          }
+        },
+        {
+          "client_id": "523118989857-mbqeacj9kvuvk50vqe4aktvbudcahrd7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sra.kalpaka_app",
+            "certificate_hash": "d4ea42dda7746519b20bd8dfd03a80bf0f57b3dc"
+          }
+        },
+        {
+          "client_id": "523118989857-tq89jqf36gnrqm64n3habb0hdusticcn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCg33Yjf0l_2qHd7EYmv7PHTS_xwU49BGU"
@@ -20,7 +41,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523118989857-tq89jqf36gnrqm64n3habb0hdusticcn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

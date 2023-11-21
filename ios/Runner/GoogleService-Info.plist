@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>523118989857-riucam491sohmkchson32ftj3sgf2ls6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.523118989857-riucam491sohmkchson32ftj3sgf2ls6</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>523118989857-f0u50upeckjgekklvlmo1frpnqsp6fc4.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAgwWAEu1HB4yyyhQXxn0fi8mQDk67ilOs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>523118989857</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.kalpakaApp</string>
+	<key>PROJECT_ID</key>
+	<string>kalpaka-register-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kalpaka-register-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:523118989857:ios:1dc6af118b1009edc18960</string>
+</dict>
+</plist>
