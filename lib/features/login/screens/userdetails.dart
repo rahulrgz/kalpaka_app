@@ -157,6 +157,7 @@ class _UserDetailsState extends State<UserDetails> {
                               EdgeInsets.only(left: h * 0.02, right: h * 0.02),
                           child: TextFormField(
                             controller: unumber,
+                            keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                                 hintText: 'Enter Number',
                                 hintStyle: TextStyle(fontSize: h * 0.02),
