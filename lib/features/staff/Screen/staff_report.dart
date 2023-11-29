@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kalpaka_app/core/global_variables/global_variables.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
+import 'package:kalpaka_app/features/staff/controller/staffController.dart';
+
+import '../../../core/commons/error.dart';
 
 class StaffReportScreen extends StatefulWidget {
-  const StaffReportScreen({super.key});
-
+  StaffReportScreen({super.key, required this.staffId});
+  String staffId;
   @override
   State<StaffReportScreen> createState() => _StaffReportScreenState();
 }
@@ -41,148 +45,71 @@ class _StaffReportScreenState extends State<StaffReportScreen> {
         ),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: DataTable(
-            columnSpacing: w * 0.1,
-            columns: [
-              DataColumn(
-                label: Text(
-                  'Date',
-                  style:
-                      TextStyle(fontSize: h * 0.021, color: Pallete.darkColor),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Attendance',
-                  style:
-                      TextStyle(fontSize: h * 0.02, color: Pallete.darkColor),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'OverTime',
-                  style:
-                      TextStyle(fontSize: h * 0.02, color: Pallete.darkColor),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Amount',
-                  style:
-                      TextStyle(fontSize: h * 0.02, color: Pallete.darkColor),
-                ),
-              ),
-            ],
-            rows: [
-              DataRow(cells: [
-                DataCell(
-                  Text(
-                      DateFormat("MMM dd").format(
-                        DateTime.now(),
-                      ),
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text(
-                    'Leave',
-                    style:
-                        TextStyle(fontSize: h * 0.02, color: Pallete.darkColor),
-                  ),
-                ),
-                DataCell(
-                  Text('0h',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text('2500',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-              ]),
-              DataRow(cells: [
-                DataCell(
-                  Text(
-                      DateFormat("MMM dd").format(
-                        DateTime.now(),
-                      ),
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text(
-                    'Half Day',
-                    style:
-                        TextStyle(fontSize: h * 0.02, color: Pallete.darkColor),
-                  ),
-                ),
-                DataCell(
-                  Text('0h',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text('2500',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-              ]),
-              DataRow(cells: [
-                DataCell(
-                  Text(
-                      DateFormat("MMM dd").format(
-                        DateTime.now(),
-                      ),
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text(
-                    'Full Day',
-                    style:
-                        TextStyle(fontSize: h * 0.02, color: Pallete.darkColor),
-                  ),
-                ),
-                DataCell(
-                  Text('2h',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text('2500',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-              ]),
-              DataRow(cells: [
-                DataCell(
-                  Text(
-                      DateFormat("MMM dd").format(
-                        DateTime.now(),
-                      ),
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text(
-                    'Full Day',
-                    style:
-                        TextStyle(fontSize: h * 0.02, color: Pallete.darkColor),
-                  ),
-                ),
-                DataCell(
-                  Text('0h',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-                DataCell(
-                  Text('2500',
-                      style: TextStyle(
-                          fontSize: h * 0.02, color: Pallete.darkColor)),
-                ),
-              ]),
-            ],
+          child: Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              return ref
+                  .watch(getStaffReportProvider(widget.staffId.toString()))
+                  .when(
+                      data: (attendenceReport) {
+                        return DataTable(
+                            columnSpacing: w * 0.1,
+                            columns: [
+                              DataColumn(
+                                label: Text(
+                                  'Date',
+                                  style: TextStyle(
+                                      fontSize: h * 0.018,
+                                      color: Pallete.darkColor),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Attendance',
+                                  style: TextStyle(
+                                      fontSize: h * 0.018,
+                                      color: Pallete.darkColor),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'OverTime',
+                                  style: TextStyle(
+                                      fontSize: h * 0.018,
+                                      color: Pallete.darkColor),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Amount',
+                                  style: TextStyle(
+                                      fontSize: h * 0.018,
+                                      color: Pallete.darkColor),
+                                ),
+                              ),
+                            ],
+                            rows:
+                                List.generate(attendenceReport.length, (index) {
+                              final String formattedDate =
+                                  DateFormat('yyyy-MM-dd').format(
+                                      attendenceReport[index].uploadDate);
+
+                              return DataRow(cells: [
+                                DataCell(Text(formattedDate.toString())),
+                                DataCell(Text(attendenceReport[index]
+                                    .attendence
+                                    .toString())),
+                                DataCell(Text(attendenceReport[index]
+                                    .overtime
+                                    .toString())),
+                                DataCell(Text(
+                                    attendenceReport[index].amt.toString())),
+                              ]);
+                            }));
+                      },
+                      error: (error, stackTrace) =>
+                          ErrorText(error: error.toString()),
+                      loading: () => const Text(''));
+            },
           ),
         ),
       ),

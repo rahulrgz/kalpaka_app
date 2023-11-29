@@ -531,12 +531,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                               radius: h * 0.027,
                                               child: IconButton(
                                                   onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      CupertinoPageRoute(
-                                                          builder: (context) =>
-                                                              const StaffReportScreen()),
-                                                    );
+                                                    // Navigator.push(
+                                                    //   context,
+                                                    //   CupertinoPageRoute(
+                                                    //       builder: (context) =>
+                                                    //           StaffReportScreen()),
+                                                    // );
                                                   },
                                                   icon: Icon(
                                                     CupertinoIcons.person_2,

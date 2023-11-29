@@ -24,16 +24,18 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
   List<String> _overTime = ["1", "2", "3", "4", "5", "6"];
   String? selectedValue1;
   String? selectedValue2;
-
+  TextEditingController amtContoller = TextEditingController();
   currentdayStatus(
       {required String attendence,
       required String overTime,
+      required String amt,
       required BuildContext context}) {
     ref.read(staffControllerProvider.notifier).addCurrendayStatus(
         stafDailyAttendence: attendence,
         overtime: overTime,
         staffId: widget.staffId,
-        context: context);
+        context: context,
+        amt: amt);
   }
 
   @override
@@ -197,6 +199,7 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
                 width: w,
                 height: h * 0.065,
                 child: TextFormField(
+                  controller: amtContoller,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
@@ -244,7 +247,8 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
                   currentdayStatus(
                       attendence: selectedValue1.toString(),
                       overTime: selectedValue2.toString(),
-                      context: context);
+                      context: context,
+                      amt: amtContoller.text.trim());
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(w * 0.85, h * 0.06),

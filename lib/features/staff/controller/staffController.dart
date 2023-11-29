@@ -10,12 +10,19 @@ import '../../../core/commons/utils.dart';
 import '../../../model/attendenceOfStaff.dart';
 import '../repository/staffRepository.dart';
 
-final getStaffAttendenceProvider = StreamProvider.family.autoDispose((ref,
-        String data) =>
-    ref.watch(staffControllerProvider.notifier).getStaffAttendence(data: data));
+final getStaffAttendenceProvider = StreamProvider.family.autoDispose(
+    (ref, String data) => ref
+        .watch(staffControllerProvider.notifier)
+        .getStaffAttendence(data: data)); //to get staffsattendence in stream
+final getStaffReportProvider = StreamProvider.family.autoDispose(
+    (ref, String staffId) => ref
+        .watch(staffControllerProvider.notifier)
+        .getStaffReport(
+            staffId: staffId)); //toget the entire attendence report of staff
 final selectedDateProvider = StateProvider<DateTime?>((ref) => null);
-final getStaffProvider = StreamProvider(
-    (ref) => ref.watch(staffControllerProvider.notifier).getStaffs());
+final getStaffProvider = StreamProvider((ref) => ref
+    .watch(staffControllerProvider.notifier)
+    .getStaffs()); //to get entire staff
 final staffControllerProvider = StateNotifierProvider((ref) {
   return StaffController(
       staffRepository: ref.read(staffRepositoryProvider), ref: ref);
@@ -61,6 +68,7 @@ class StaffController extends StateNotifier<bool> {
       {required String stafDailyAttendence,
       required String overtime,
       required BuildContext context,
+      required String amt,
       required String staffId}) async {
     DateTime now = DateTime.now();
     var datePicked1 = DateTime(now.year, now.month, now.day, 0, 0, 0);
@@ -75,7 +83,8 @@ class StaffController extends StateNotifier<bool> {
         overtime: overtime,
         uid: "",
         delete: false,
-        staffId: staffId);
+        staffId: staffId,
+        amt: amt);
     final result = await _staffRepository.addCurrendayStatus(
         staffDailyAttendence: staffDailyAttendence, staffId: staffId);
     result.fold((l) {
@@ -88,5 +97,9 @@ class StaffController extends StateNotifier<bool> {
 
   Stream<List<StaffAttendence>> getStaffAttendence({required String data}) {
     return _staffRepository.getStaffAttendence(data: data);
-  } //todo
+  }
+
+  Stream<List<StaffAttendence>> getStaffReport({required String staffId}) {
+    return _staffRepository.getStaffReport(staffId: staffId);
+  }
 }

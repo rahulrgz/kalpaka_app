@@ -166,7 +166,9 @@ class _ViewStaffState extends State<ViewStaff> {
                       Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) => const StaffReportScreen(),
+                          builder: (context) => StaffReportScreen(
+                            staffId: staffId.toString(),
+                          ),
                         ),
                       );
                     },
@@ -380,7 +382,7 @@ class _ViewStaffState extends State<ViewStaff> {
                                         ),
                                         Center(
                                           child: Text(
-                                            "₹ 500",
+                                            "₹ ${attendence[0].amt}",
                                             style: TextStyle(
                                                 fontSize: h * 0.03,
                                                 color: Pallete.darkColor,

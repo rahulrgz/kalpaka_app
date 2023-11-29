@@ -8,36 +8,37 @@ class StaffAttendence {
   String uid;
   DocumentReference? ref;
   bool delete;
+  String amt;
 
 //<editor-fold desc="Data Methods">
-  StaffAttendence({
-    this.ref,
-    required this.uploadDate,
-    required this.staffId,
-    required this.attendence,
-    required this.overtime,
-    required this.uid,
-    required this.delete,
-  });
+  StaffAttendence(
+      {this.ref,
+      required this.uploadDate,
+      required this.staffId,
+      required this.attendence,
+      required this.overtime,
+      required this.uid,
+      required this.delete,
+      required this.amt});
 
-  StaffAttendence copyWith({
-    DateTime? uploadDate,
-    String? attendence,
-    String? overtime,
-    String? uid,
-    bool? delete,
-    String? staffId,
-    DocumentReference? ref,
-  }) {
+  StaffAttendence copyWith(
+      {DateTime? uploadDate,
+      String? attendence,
+      String? overtime,
+      String? uid,
+      bool? delete,
+      String? staffId,
+      DocumentReference? ref,
+      String? amt}) {
     return StaffAttendence(
-      uploadDate: uploadDate ?? this.uploadDate,
-      attendence: attendence ?? this.attendence,
-      overtime: overtime ?? this.overtime,
-      uid: uid ?? this.uid,
-      delete: delete ?? this.delete,
-      ref: ref ?? this.ref,
-      staffId: staffId ?? this.staffId,
-    );
+        uploadDate: uploadDate ?? this.uploadDate,
+        attendence: attendence ?? this.attendence,
+        overtime: overtime ?? this.overtime,
+        uid: uid ?? this.uid,
+        delete: delete ?? this.delete,
+        ref: ref ?? this.ref,
+        staffId: staffId ?? this.staffId,
+        amt: amt ?? this.amt);
   }
 
   Map<String, dynamic> toMap() {
@@ -49,6 +50,7 @@ class StaffAttendence {
       'delete': this.delete,
       'ref': this.ref,
       'staffId': this.staffId,
+      'amt': this.amt
     };
   }
 
@@ -61,6 +63,7 @@ class StaffAttendence {
       delete: map['delete'] as bool,
       ref: map['ref'] as DocumentReference,
       staffId: map['staffId'] as String,
+      amt: map['amt'] as String,
     );
   }
 

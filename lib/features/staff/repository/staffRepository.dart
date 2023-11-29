@@ -113,4 +113,15 @@ class StaffRepository {
     // print(k);
     // return k;
   }
+
+  Stream<List<StaffAttendence>> getStaffReport({required String staffId}) {
+    return _staff
+        .doc(staffId.toString())
+        .collection("staffAttendence")
+        .snapshots()
+        .map((event) => event.docs
+            .map((e) =>
+                StaffAttendence.fromMap(e.data() as Map<String, dynamic>))
+            .toList());
+  }
 }
