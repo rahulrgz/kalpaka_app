@@ -250,54 +250,103 @@ class _ViewStaffState extends State<ViewStaff> {
                       print("aten");
                       print(attendence);
                       return attendence.isEmpty
-                          ? Text("No data")
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          ? Text("No data updated")
+                          : Column(
                               children: [
-                                Container(
-                                  width: w * 0.4,
-                                  decoration: BoxDecoration(
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 3,
-                                          spreadRadius: 1,
-                                          offset: Offset(1, 1))
-                                    ],
-                                    color: Pallete.whiteColor,
-                                    borderRadius:
-                                        BorderRadius.circular(h * 0.02),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(h * 0.02),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Status :',
-                                          style: TextStyle(
-                                              fontSize: h * 0.015,
-                                              color: Pallete.darkColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: h * 0.01,
-                                        ),
-                                        Center(
-                                          child: Text(
-                                            attendence[0].attendence,
-                                            style: TextStyle(
-                                              fontSize: h * 0.02,
-                                              color: Colors.black,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      width: w * 0.4,
+                                      decoration: BoxDecoration(
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 3,
+                                              spreadRadius: 1,
+                                              offset: Offset(1, 1))
+                                        ],
+                                        color: Pallete.whiteColor,
+                                        borderRadius:
+                                            BorderRadius.circular(h * 0.02),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(h * 0.02),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Status :',
+                                              style: TextStyle(
+                                                  fontSize: h * 0.015,
+                                                  color: Pallete.darkColor,
+                                                  fontWeight: FontWeight.bold),
                                             ),
-                                          ),
+                                            SizedBox(
+                                              height: h * 0.01,
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                attendence[0].attendence,
+                                                style: TextStyle(
+                                                  fontSize: h * 0.02,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: w * 0.4,
+                                      decoration: BoxDecoration(
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 3,
+                                              spreadRadius: 1,
+                                              offset: Offset(1, 2))
+                                        ],
+                                        color: Pallete.whiteColor,
+                                        borderRadius:
+                                            BorderRadius.circular(h * 0.02),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(h * 0.02),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'OverTime:',
+                                              style: TextStyle(
+                                                  fontSize: h * 0.015,
+                                                  color: Pallete.darkColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: h * 0.01,
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                attendence[0].overtime,
+                                                style: TextStyle(
+                                                    fontSize: h * 0.02,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                                SizedBox(height: h * 0.037),
                                 Container(
                                   width: w * 0.4,
                                   decoration: BoxDecoration(
@@ -320,7 +369,7 @@ class _ViewStaffState extends State<ViewStaff> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'OverTime:',
+                                          'Amount Paid:',
                                           style: TextStyle(
                                               fontSize: h * 0.015,
                                               color: Pallete.darkColor,
@@ -331,10 +380,11 @@ class _ViewStaffState extends State<ViewStaff> {
                                         ),
                                         Center(
                                           child: Text(
-                                            attendence[0].overtime,
+                                            "₹ 500",
                                             style: TextStyle(
-                                                fontSize: h * 0.02,
-                                                color: Pallete.darkColor),
+                                                fontSize: h * 0.03,
+                                                color: Pallete.darkColor,
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ),
                                       ],
@@ -346,53 +396,8 @@ class _ViewStaffState extends State<ViewStaff> {
                     },
                     error: (error, stackTrace) =>
                         ErrorText(error: error.toString()),
-                    loading: () => const Loader());
+                    loading: () => const Text('Please Update Details'));
               },
-            ),
-            SizedBox(
-              height: h * 0.037,
-            ),
-            Container(
-              width: w * 0.4,
-              decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 3,
-                      spreadRadius: 1,
-                      offset: Offset(1, 2))
-                ],
-                color: Pallete.whiteColor,
-                borderRadius: BorderRadius.circular(h * 0.02),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(h * 0.02),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Amount Paid:',
-                      style: TextStyle(
-                          fontSize: h * 0.015,
-                          color: Pallete.darkColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: h * 0.01,
-                    ),
-                    Center(
-                      child: Text(
-                        "₹ 500",
-                        style: TextStyle(
-                            fontSize: h * 0.03,
-                            color: Pallete.darkColor,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ),
           ],
         ),
