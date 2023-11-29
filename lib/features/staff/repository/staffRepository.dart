@@ -46,7 +46,6 @@ class StaffRepository {
   }
 
   Stream<List<StaffModel>> getStaffs() {
-    print("kkkkkkkkkk");
     return _staff.snapshots().map((event) => event.docs
         .map((e) => StaffModel.fromJson(e.data() as Map<String, dynamic>))
         .toList());
