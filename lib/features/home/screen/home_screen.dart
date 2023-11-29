@@ -9,8 +9,8 @@ import 'package:kalpaka_app/features/orders/screen/add_order.dart';
 import 'package:kalpaka_app/features/orders/screen/order_screen.dart';
 import 'package:kalpaka_app/features/profile/profile_screen.dart';
 import 'package:kalpaka_app/features/staff/Screen/add_staff.dart';
-import 'package:kalpaka_app/features/staff/Screen/office_staff.dart';
 import 'package:kalpaka_app/features/staff/Screen/staff_page.dart';
+import 'package:kalpaka_app/features/staff/Screen/staff_report.dart';
 import 'package:kalpaka_app/features/staff/controller/staffController.dart';
 
 import '../../../core/commons/error.dart';
@@ -535,7 +535,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       context,
                                                       CupertinoPageRoute(
                                                           builder: (context) =>
-                                                              const OfficeStaffScreen()),
+                                                              const StaffReportScreen()),
                                                     );
                                                   },
                                                   icon: Icon(
@@ -869,9 +869,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     padding: EdgeInsets.only(
                                                         left: h * 0.02),
                                                     child: SizedBox(
-                                                      height: h * 0.1,
-                                                      width: w * 0.16,
+                                                      width: w * 0.17,
                                                       child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .center,

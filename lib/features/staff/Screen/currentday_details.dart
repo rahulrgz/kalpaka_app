@@ -11,7 +11,9 @@ import '../controller/staffController.dart';
 
 class CurrentDetailsChange extends ConsumerStatefulWidget {
   CurrentDetailsChange({super.key, required this.staffId});
+
   String staffId;
+
   @override
   ConsumerState<CurrentDetailsChange> createState() =>
       _CurrentDetailsChangeState();
@@ -22,6 +24,7 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
   List<String> _overTime = ["1", "2", "3", "4", "5", "6"];
   String? selectedValue1;
   String? selectedValue2;
+
   currentdayStatus(
       {required String attendence,
       required String overTime,
@@ -186,6 +189,49 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
                     menuItemStyleData: const MenuItemStyleData(
                       height: 40,
                     ),
+                  ),
+                ),
+              ),
+              SizedBox(height: h * 0.03),
+              SizedBox(
+                width: w,
+                height: h * 0.065,
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          const BorderSide(color: Pallete.secondaryColor),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          const BorderSide(color: Pallete.secondaryColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          const BorderSide(color: Pallete.secondaryColor),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          const BorderSide(color: Pallete.secondaryColor),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    hintText: 'Amount Paid',
+                    hintStyle: GoogleFonts.urbanist(
+                        fontWeight: FontWeight.w400,
+                        color: Pallete.secondaryColor,
+                        fontSize: w * 0.035),
                   ),
                 ),
               ),

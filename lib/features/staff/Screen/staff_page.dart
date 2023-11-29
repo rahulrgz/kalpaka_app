@@ -53,9 +53,10 @@ class _StaffScreenState extends State<StaffScreen> {
                               Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => ViewStaff(
-                                          singleStaff: staffs[index],
-                                        )),
+                                  builder: (context) => ViewStaff(
+                                    singleStaff: staffs[index],
+                                  ),
+                                ),
                               );
                             },
                             child: ListTile(

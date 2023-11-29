@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
 import 'package:kalpaka_app/features/staff/Screen/currentday_details.dart';
+import 'package:kalpaka_app/features/staff/Screen/staff_report.dart';
 import 'package:kalpaka_app/features/staff/controller/staffController.dart';
 import 'package:kalpaka_app/model/staffModel.dart';
 
@@ -25,74 +26,74 @@ class ViewStaff extends StatefulWidget {
 class _ViewStaffState extends State<ViewStaff> {
   String? staffId;
   bool _updated = true;
-  void deleteConfirmBoxMobile(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        contentTextStyle: TextStyle(
-            fontWeight: FontWeight.w500,
-            color: Pallete.primaryColor,
-            fontSize: w * 0.04),
-        actionsAlignment: MainAxisAlignment.center,
-        backgroundColor: Pallete.secondaryColor,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(w * 0.05)),
-        actionsPadding: EdgeInsets.only(bottom: h * 0.03),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: h * 0.03),
-            Text('Are you sure you want to ',
-                style: TextStyle(
-                    fontSize: h * 0.019,
-                    color: Pallete.whiteColor,
-                    fontWeight: FontWeight.bold)),
-            Text('delete?',
-                style: TextStyle(
-                    fontSize: h * 0.019,
-                    color: Pallete.whiteColor,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
-        actions: [
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context),
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(w * 0.23, h * 0.035),
-              backgroundColor: Pallete.secondaryColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(h * 0.008),
-                  side: const BorderSide(color: Pallete.primaryColor)),
-            ),
-            child: Text(
-              'Cancel',
-              style: TextStyle(
-                  fontSize: w * 0.037,
-                  fontWeight: FontWeight.bold,
-                  color: Pallete.primaryColor),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(w * 0.23, h * 0.035),
-              backgroundColor: Pallete.primaryColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(h * 0.008),
-                  side: const BorderSide(color: Pallete.secondaryColor)),
-            ),
-            child: Text(
-              'Delete',
-              style: TextStyle(
-                  fontSize: w * 0.037,
-                  fontWeight: FontWeight.bold,
-                  color: Pallete.secondaryColor),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // void deleteConfirmBoxMobile(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       contentTextStyle: TextStyle(
+  //           fontWeight: FontWeight.w500,
+  //           color: Pallete.primaryColor,
+  //           fontSize: w * 0.04),
+  //       actionsAlignment: MainAxisAlignment.center,
+  //       backgroundColor: Pallete.secondaryColor,
+  //       shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(w * 0.05)),
+  //       actionsPadding: EdgeInsets.only(bottom: h * 0.03),
+  //       content: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           SizedBox(height: h * 0.03),
+  //           Text('Are you sure you want to ',
+  //               style: TextStyle(
+  //                   fontSize: h * 0.019,
+  //                   color: Pallete.whiteColor,
+  //                   fontWeight: FontWeight.bold)),
+  //           Text('delete?',
+  //               style: TextStyle(
+  //                   fontSize: h * 0.019,
+  //                   color: Pallete.whiteColor,
+  //                   fontWeight: FontWeight.bold)),
+  //         ],
+  //       ),
+  //       actions: [
+  //         ElevatedButton(
+  //           onPressed: () => Navigator.pop(context),
+  //           style: ElevatedButton.styleFrom(
+  //             minimumSize: Size(w * 0.23, h * 0.035),
+  //             backgroundColor: Pallete.secondaryColor,
+  //             shape: RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.circular(h * 0.008),
+  //                 side: const BorderSide(color: Pallete.primaryColor)),
+  //           ),
+  //           child: Text(
+  //             'Cancel',
+  //             style: TextStyle(
+  //                 fontSize: w * 0.037,
+  //                 fontWeight: FontWeight.bold,
+  //                 color: Pallete.primaryColor),
+  //           ),
+  //         ),
+  //         ElevatedButton(
+  //           onPressed: () {},
+  //           style: ElevatedButton.styleFrom(
+  //             minimumSize: Size(w * 0.23, h * 0.035),
+  //             backgroundColor: Pallete.primaryColor,
+  //             shape: RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.circular(h * 0.008),
+  //                 side: const BorderSide(color: Pallete.secondaryColor)),
+  //           ),
+  //           child: Text(
+  //             'Delete',
+  //             style: TextStyle(
+  //                 fontSize: w * 0.037,
+  //                 fontWeight: FontWeight.bold,
+  //                 color: Pallete.secondaryColor),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   void initState() {
@@ -161,13 +162,19 @@ class _ViewStaffState extends State<ViewStaff> {
                   ),
                   const Spacer(),
                   IconButton(
-                      onPressed: () {
-                        deleteConfirmBoxMobile(context);
-                      },
-                      icon: Icon(
-                        CupertinoIcons.delete,
-                        size: h * 0.023,
-                      ))
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const StaffReportScreen(),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      CupertinoIcons.doc_chart,
+                      size: h * 0.03,
+                    ),
+                  )
                 ],
               ),
             ),
@@ -243,7 +250,7 @@ class _ViewStaffState extends State<ViewStaff> {
                       print("aten");
                       print(attendence);
                       return attendence.isEmpty
-                          ? Text("no data")
+                          ? Text("No data")
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -345,90 +352,48 @@ class _ViewStaffState extends State<ViewStaff> {
             SizedBox(
               height: h * 0.037,
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     Container(
-            //       width: w * 0.4,
-            //       decoration: BoxDecoration(
-            //         boxShadow: const [
-            //           BoxShadow(
-            //               color: Colors.grey,
-            //               blurRadius: 3,
-            //               spreadRadius: 1,
-            //               offset: Offset(1, 1))
-            //         ],
-            //         color: Pallete.whiteColor,
-            //         borderRadius: BorderRadius.circular(h * 0.02),
-            //       ),
-            //       child: Padding(
-            //         padding: EdgeInsets.all(h * 0.02),
-            //         child: Column(
-            //           mainAxisSize: MainAxisSize.min,
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             Text(
-            //               'Total Days:',
-            //               style: TextStyle(
-            //                   fontSize: h * 0.015,
-            //                   color: Pallete.darkColor,
-            //                   fontWeight: FontWeight.bold),
-            //             ),
-            //             SizedBox(
-            //               height: h * 0.01,
-            //             ),
-            //             Center(
-            //               child: Text(
-            //                 _updated ? "Update it" : '24',
-            //                 style: TextStyle(
-            //                     fontSize: h * 0.02, color: Pallete.darkColor),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //     Container(
-            //       width: w * 0.4,
-            //       decoration: BoxDecoration(
-            //           boxShadow: const [
-            //             BoxShadow(
-            //                 color: Colors.grey,
-            //                 blurRadius: 3,
-            //                 spreadRadius: 1,
-            //                 offset: Offset(1, 2))
-            //           ],
-            //           color: Pallete.whiteColor,
-            //           borderRadius: BorderRadius.circular(h * 0.02)),
-            //       child: Padding(
-            //         padding: EdgeInsets.all(h * 0.02),
-            //         child: Column(
-            //           mainAxisSize: MainAxisSize.min,
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             Text(
-            //               'Total Credit:',
-            //               style: TextStyle(
-            //                   fontSize: h * 0.015,
-            //                   color: Pallete.darkColor,
-            //                   fontWeight: FontWeight.bold),
-            //             ),
-            //             SizedBox(
-            //               height: h * 0.01,
-            //             ),
-            //             Center(
-            //               child: Text(
-            //                 _updated ? "Update it" : '24000',
-            //                 style: TextStyle(
-            //                     fontSize: h * 0.02, color: Pallete.darkColor),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            Container(
+              width: w * 0.4,
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 3,
+                      spreadRadius: 1,
+                      offset: Offset(1, 2))
+                ],
+                color: Pallete.whiteColor,
+                borderRadius: BorderRadius.circular(h * 0.02),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(h * 0.02),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Amount Paid:',
+                      style: TextStyle(
+                          fontSize: h * 0.015,
+                          color: Pallete.darkColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: h * 0.01,
+                    ),
+                    Center(
+                      child: Text(
+                        "₹ 500",
+                        style: TextStyle(
+                            fontSize: h * 0.03,
+                            color: Pallete.darkColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
