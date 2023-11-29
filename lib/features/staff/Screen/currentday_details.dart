@@ -1,23 +1,45 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
+import '../controller/staffController.dart';
 
-class CurrentDetailsChange extends StatefulWidget {
-  const CurrentDetailsChange({super.key});
-
+class CurrentDetailsChange extends ConsumerStatefulWidget {
+  CurrentDetailsChange({super.key, required this.staffId});
+  String staffId;
   @override
-  State<CurrentDetailsChange> createState() => _CurrentDetailsChangeState();
+  ConsumerState<CurrentDetailsChange> createState() =>
+      _CurrentDetailsChangeState();
 }
 
-class _CurrentDetailsChangeState extends State<CurrentDetailsChange> {
+class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
   List<String> _presentStatus = ["Full Day", "Half Day", 'Leave'];
   List<String> _overTime = ["1", "2", "3", "4", "5", "6"];
   String? selectedValue1;
   String? selectedValue2;
+  currentdayStatus(
+      {required String attendence,
+      required String overTime,
+      required BuildContext context}) {
+    ref.read(staffControllerProvider.notifier).addCurrendayStatus(
+        stafDailyAttendence: attendence,
+        overtime: overTime,
+        staffId: widget.staffId,
+        context: context);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("staffId");
+    print(widget.staffId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +106,7 @@ class _CurrentDetailsChangeState extends State<CurrentDetailsChange> {
                     value: selectedValue1,
                     onChanged: (String? value) {
                       setState(() {
-                        selectedValue1 = value!;
+                        selectedValue1 = value!; //attendence
                       });
                       // // ref
                       // //     .read(selectedValue.notifier)
@@ -143,7 +165,8 @@ class _CurrentDetailsChangeState extends State<CurrentDetailsChange> {
                     value: selectedValue2,
                     onChanged: (String? value) {
                       setState(() {
-                        selectedValue2 = value!;
+                        print("///");
+                        selectedValue2 = value!; //overtime
                       });
                       // // ref
                       // //     .read(selectedValue.notifier)
@@ -171,7 +194,12 @@ class _CurrentDetailsChangeState extends State<CurrentDetailsChange> {
                 height: h * 0.1,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  currentdayStatus(
+                      attendence: selectedValue1.toString(),
+                      overTime: selectedValue2.toString(),
+                      context: context);
+                },
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(w * 0.85, h * 0.06),
                     backgroundColor: Pallete.secondaryColor,

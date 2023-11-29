@@ -1,10 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:kalpaka_app/features/login/repository/login_repository.dart';
 import 'package:kalpaka_app/model/staffModel.dart';
 
 import '../../../core/commons/utils.dart';
+import '../../../model/attendenceOfStaff.dart';
 import '../repository/staffRepository.dart';
 
+final getStaffAttendenceProvider = StreamProvider.family.autoDispose((ref,
+        String data) =>
+    ref.watch(staffControllerProvider.notifier).getStaffAttendence(data: data));
+final selectedDateProvider = StateProvider<DateTime?>((ref) => null);
 final getStaffProvider = StreamProvider(
     (ref) => ref.watch(staffControllerProvider.notifier).getStaffs());
 final staffControllerProvider = StateNotifierProvider((ref) {
@@ -47,4 +56,37 @@ class StaffController extends StateNotifier<bool> {
   Stream<List<StaffModel>> getStaffs() {
     return _staffRepository.getStaffs();
   }
+
+  addCurrendayStatus(
+      {required String stafDailyAttendence,
+      required String overtime,
+      required BuildContext context,
+      required String staffId}) async {
+    DateTime now = DateTime.now();
+    var datePicked1 = DateTime(now.year, now.month, now.day, 0, 0, 0);
+    print("contr");
+    print(datePicked1);
+    // selectedDate1 = value;
+    // ref.watch(startDateProvider.notifier).update((state) => datePicked1);
+    // String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    var staffDailyAttendence = StaffAttendence(
+        uploadDate: datePicked1,
+        attendence: stafDailyAttendence,
+        overtime: overtime,
+        uid: "",
+        delete: false,
+        staffId: staffId);
+    final result = await _staffRepository.addCurrendayStatus(
+        staffDailyAttendence: staffDailyAttendence, staffId: staffId);
+    result.fold((l) {
+      showSnackBar(context: context, content: "Status Updated Failed");
+    }, (r) {
+      showSnackBar(context: context, content: "Status Updated Successfully");
+      Navigator.pop(context);
+    });
+  }
+
+  Stream<List<StaffAttendence>> getStaffAttendence({required String data}) {
+    return _staffRepository.getStaffAttendence(data: data);
+  } //todo
 }

@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               error: (error, stackTrace) =>
                                                   ErrorText(
                                                       error: error.toString()),
-                                              loading: () => const Text('')),
+                                              loading: () => const Loader()),
                                           Text(
                                             "No.of Documents",
                                             style: TextStyle(
@@ -861,54 +861,54 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: ref.watch(allUsrProvider).when(
                                           data: (users) {
                                             return ListView.builder(
-                                                physics:
-                                                    BouncingScrollPhysics(),
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 itemCount: users.length,
                                                 itemBuilder: (context, index) {
                                                   return Padding(
                                                     padding: EdgeInsets.only(
-                                                        left: h * 0.02,
-                                                        right: h * 0.01),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        CircleAvatar(
-                                                          radius: h * 0.027,
-                                                          backgroundImage:
-                                                              NetworkImage(users[
-                                                                      index]
-                                                                  .profile
-                                                                  .toString()),
-                                                        ),
-                                                        SizedBox(
-                                                            height: h * 0.01),
-                                                        Text(
-                                                          users[index]
-                                                              .name
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                              fontSize:
-                                                                  h * 0.015,
-                                                              color: Pallete
-                                                                  .darkColor),
-                                                        ),
-                                                        Text(
-                                                          users[index]
-                                                              .label
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                              fontSize:
-                                                                  h * 0.01,
-                                                              color: Pallete
-                                                                  .darkColor),
-                                                        ),
-                                                      ],
+                                                        left: h * 0.02),
+                                                    child: SizedBox(
+                                                      height: h * 0.1,
+                                                      width: w * 0.16,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          CircleAvatar(
+                                                            radius: h * 0.027,
+                                                            backgroundImage:
+                                                                NetworkImage(users[
+                                                                        index]
+                                                                    .profile
+                                                                    .toString()),
+                                                          ),
+                                                          SizedBox(
+                                                            height: h * 0.01,
+                                                          ),
+                                                          Text(
+                                                            users[index]
+                                                                .name
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    h * 0.015,
+                                                                color: Pallete
+                                                                    .darkColor),
+                                                          ),
+                                                          Text(
+                                                            users[index]
+                                                                .label
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    h * 0.01,
+                                                                color: Pallete
+                                                                    .darkColor),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   );
                                                 });

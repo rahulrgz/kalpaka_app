@@ -1,10 +1,18 @@
+import 'dart:convert';
+
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
 import 'package:kalpaka_app/features/staff/Screen/currentday_details.dart';
+import 'package:kalpaka_app/features/staff/controller/staffController.dart';
 import 'package:kalpaka_app/model/staffModel.dart';
 
+import '../../../core/commons/error.dart';
+import '../../../core/commons/loader.dart';
+import '../../../core/commons/utils.dart';
 import '../../../core/global_variables/global_variables.dart';
 
 class ViewStaff extends StatefulWidget {
@@ -15,6 +23,7 @@ class ViewStaff extends StatefulWidget {
 }
 
 class _ViewStaffState extends State<ViewStaff> {
+  String? staffId;
   bool _updated = true;
   void deleteConfirmBoxMobile(BuildContext context) {
     showDialog(
@@ -86,6 +95,13 @@ class _ViewStaffState extends State<ViewStaff> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    staffId = widget.singleStaff.uid;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Pallete.whiteColor,
@@ -105,7 +121,7 @@ class _ViewStaffState extends State<ViewStaff> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(
@@ -161,36 +177,44 @@ class _ViewStaffState extends State<ViewStaff> {
                   right: h * 0.01,
                   left: h * 0.01,
                   bottom: h * 0.03),
-              child: SizedBox(
-                child: EasyDateTimeLine(
-                  initialDate: DateTime.now(),
-                  onDateChange: (selectedDate) {
-                    //`selectedDate` the new date selected.
-                    print(selectedDate);
-                  },
-                  activeColor: const Color(0xffFFBF9B),
-                  headerProps: const EasyHeaderProps(
-                    selectedDateFormat: SelectedDateFormat.monthOnly,
-                  ),
-                  dayProps: EasyDayProps(
-                    height: h * 0.067,
-                    width: h * 0.067,
-                    dayStructure: DayStructure.dayNumDayStr,
-                    inactiveDayStyle: DayStyle(
-                      borderRadius: h * 0.05,
-                      dayNumStyle: TextStyle(
-                        fontSize: h * 0.02,
+              child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  return SizedBox(
+                    child: EasyDateTimeLine(
+                      initialDate: DateTime.now(),
+                      onDateChange: (selectedDate) {
+                        //`selectedDate` the new date selected.
+                        ("/////");
+                        print(selectedDate);
+                        ref
+                            .read(selectedDateProvider.notifier)
+                            .update((state) => selectedDate);
+                      },
+                      activeColor: const Color(0xffFFBF9B),
+                      headerProps: const EasyHeaderProps(
+                        selectedDateFormat: SelectedDateFormat.monthOnly,
+                      ),
+                      dayProps: EasyDayProps(
+                        height: h * 0.067,
+                        width: h * 0.067,
+                        dayStructure: DayStructure.dayNumDayStr,
+                        inactiveDayStyle: DayStyle(
+                          borderRadius: h * 0.05,
+                          dayNumStyle: TextStyle(
+                            fontSize: h * 0.02,
+                          ),
+                        ),
+                        activeDayStyle: DayStyle(
+                          borderRadius: h * 0.05,
+                          dayNumStyle: TextStyle(
+                            fontSize: h * 0.02,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
-                    activeDayStyle: DayStyle(
-                      borderRadius: h * 0.05,
-                      dayNumStyle: TextStyle(
-                        fontSize: h * 0.02,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
             SizedBox(
@@ -206,92 +230,117 @@ class _ViewStaffState extends State<ViewStaff> {
             SizedBox(
               height: h * 0.02,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: w * 0.4,
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 3,
-                          spreadRadius: 1,
-                          offset: Offset(1, 1))
-                    ],
-                    color: Pallete.whiteColor,
-                    borderRadius: BorderRadius.circular(h * 0.02),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(h * 0.02),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Status :',
-                          style: TextStyle(
-                              fontSize: h * 0.015,
-                              color: Pallete.darkColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: h * 0.01,
-                        ),
-                        Center(
-                          child: Text(
-                            _updated ? "Update it" : "Leave",
-                            style: TextStyle(
-                              fontSize: h * 0.02,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width: w * 0.4,
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 3,
-                          spreadRadius: 1,
-                          offset: Offset(1, 2))
-                    ],
-                    color: Pallete.whiteColor,
-                    borderRadius: BorderRadius.circular(h * 0.02),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(h * 0.02),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'OverTime:',
-                          style: TextStyle(
-                              fontSize: h * 0.015,
-                              color: Pallete.darkColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: h * 0.01,
-                        ),
-                        Center(
-                          child: Text(
-                            _updated ? "Update it" : '0',
-                            style: TextStyle(
-                                fontSize: h * 0.02, color: Pallete.darkColor),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+            Consumer(
+              builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                DateTime? d = ref.watch(selectedDateProvider) ?? DateTime.now();
+                Map _temp = {
+                  "date": d?.toIso8601String(),
+                  "staffId": staffId.toString(),
+                };
+                String encode = jsonEncode(_temp);
+                return ref.watch(getStaffAttendenceProvider(encode)).when(
+                    data: (attendence) {
+                      print("aten");
+                      print(attendence);
+                      return attendence.isEmpty
+                          ? Text("no data")
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  width: w * 0.4,
+                                  decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 3,
+                                          spreadRadius: 1,
+                                          offset: Offset(1, 1))
+                                    ],
+                                    color: Pallete.whiteColor,
+                                    borderRadius:
+                                        BorderRadius.circular(h * 0.02),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(h * 0.02),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Status :',
+                                          style: TextStyle(
+                                              fontSize: h * 0.015,
+                                              color: Pallete.darkColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: h * 0.01,
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            attendence[0].attendence,
+                                            style: TextStyle(
+                                              fontSize: h * 0.02,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: w * 0.4,
+                                  decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 3,
+                                          spreadRadius: 1,
+                                          offset: Offset(1, 2))
+                                    ],
+                                    color: Pallete.whiteColor,
+                                    borderRadius:
+                                        BorderRadius.circular(h * 0.02),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(h * 0.02),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'OverTime:',
+                                          style: TextStyle(
+                                              fontSize: h * 0.015,
+                                              color: Pallete.darkColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: h * 0.01,
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            attendence[0].overtime,
+                                            style: TextStyle(
+                                                fontSize: h * 0.02,
+                                                color: Pallete.darkColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                    },
+                    error: (error, stackTrace) =>
+                        ErrorText(error: error.toString()),
+                    loading: () => const Loader());
+              },
             ),
             SizedBox(
               height: h * 0.037,
@@ -384,25 +433,42 @@ class _ViewStaffState extends State<ViewStaff> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Pallete.darkColor,
-        foregroundColor: Pallete.whiteColor,
-        onPressed: () {
-          Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => CurrentDetailsChange(),
+      floatingActionButton: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          DateTime? d = ref.watch(selectedDateProvider) ?? null;
+          return FloatingActionButton.extended(
+            backgroundColor: Pallete.darkColor,
+            foregroundColor: Pallete.whiteColor,
+            onPressed: () {
+              DateTime now = DateTime.now();
+              var formattedDate =
+                  DateTime(now.year, now.month, now.day, 0, 0, 0);
+              print(formattedDate);
+
+              if (ref.read(selectedDateProvider) == formattedDate) {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => CurrentDetailsChange(
+                      staffId: widget.singleStaff.uid,
+                    ),
+                  ),
+                );
+              } else {
+                showSnackBar(
+                    context: context, content: "Status Updated Successfully");
+              }
+            },
+            icon: Icon(
+              CupertinoIcons.time,
+              size: h * 0.02,
+            ),
+            label: Text(
+              'Update Today Status',
+              style: TextStyle(fontSize: h * 0.017),
             ),
           );
         },
-        icon: Icon(
-          CupertinoIcons.time,
-          size: h * 0.02,
-        ),
-        label: Text(
-          'Update Today Status',
-          style: TextStyle(fontSize: h * 0.017),
-        ),
       ),
     );
   }
