@@ -241,7 +241,11 @@ class _ViewStaffState extends State<ViewStaff> {
             ),
             Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                DateTime? d = ref.watch(selectedDateProvider) ?? DateTime.now();
+                DateTime now = DateTime.now();
+                var datePicked1 =
+                    DateTime(now.year, now.month, now.day, 0, 0, 0);
+                DateTime? d = ref.watch(selectedDateProvider) ?? datePicked1;
+
                 Map _temp = {
                   "date": d?.toIso8601String(),
                   "staffId": staffId.toString(),
@@ -398,7 +402,7 @@ class _ViewStaffState extends State<ViewStaff> {
                     },
                     error: (error, stackTrace) =>
                         ErrorText(error: error.toString()),
-                    loading: () => const Text('Please Update Details'));
+                    loading: () => const Loader());
               },
             ),
           ],
@@ -408,38 +412,95 @@ class _ViewStaffState extends State<ViewStaff> {
       floatingActionButton: Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
           DateTime? d = ref.watch(selectedDateProvider) ?? null;
-          return FloatingActionButton.extended(
-            backgroundColor: Pallete.darkColor,
-            foregroundColor: Pallete.whiteColor,
-            onPressed: () {
-              DateTime now = DateTime.now();
-              var formattedDate =
-                  DateTime(now.year, now.month, now.day, 0, 0, 0);
-              print(formattedDate);
 
-              if (ref.read(selectedDateProvider) == formattedDate) {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => CurrentDetailsChange(
-                      staffId: widget.singleStaff.uid,
-                    ),
-                  ),
-                );
-              } else {
-                showSnackBar(
-                    context: context, content: "Status Updated Successfully");
-              }
-            },
-            icon: Icon(
-              CupertinoIcons.time,
-              size: h * 0.02,
-            ),
-            label: Text(
-              'Update Today Status',
-              style: TextStyle(fontSize: h * 0.017),
-            ),
-          );
+          DateTime now = DateTime.now();
+          var datePicked1 = DateTime(now.year, now.month, now.day, 0, 0, 0);
+          DateTime? d1 = ref.watch(selectedDateProvider) ?? datePicked1;
+
+          Map _temp = {
+            "date": d1?.toIso8601String(),
+            "staffId": staffId.toString(),
+          };
+          String encode = jsonEncode(_temp);
+          return ref.watch(getStaffAttendenceProvider(encode)).when(
+              data: (attendence) {
+                print("aten");
+
+                return attendence.isEmpty
+                    ? Text("No data updated")
+                    : FloatingActionButton.extended(
+                        backgroundColor: Pallete.darkColor,
+                        foregroundColor: Pallete.whiteColor,
+                        onPressed: () {
+                          DateTime now = DateTime.now();
+                          DateTime formattedDate =
+                              DateTime(now.year, now.month, now.day, 0, 0, 0);
+
+                          if (ref.read(selectedDateProvider) == formattedDate ||
+                              ref
+                                  .read(selectedDateProvider)!
+                                  .isBefore(formattedDate)) {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => CurrentDetailsChange(
+                                  staffId: widget.singleStaff.uid,
+                                  amt: attendence.isNotEmpty
+                                      ? attendence[0].amt
+                                      : null,
+                                  overtime: attendence.isNotEmpty
+                                      ? attendence[0].overtime
+                                      : null,
+                                  a: attendence.isNotEmpty
+                                      ? attendence[0].attendence
+                                      : null,
+                                  data: attendence.isNotEmpty
+                                      ? attendence[0]
+                                      : null,
+                                ),
+                              ),
+                            );
+                          }
+                          // else if () {
+                          //   Navigator.push(
+                          //     context,
+                          //     CupertinoPageRoute(
+                          //       builder: (context) => CurrentDetailsChange(
+                          //         staffId: widget.singleStaff.uid,
+                          //         amt: attendence.isNotEmpty
+                          //             ? attendence[0].amt
+                          //             : null,
+                          //         overtime: attendence.isNotEmpty
+                          //             ? attendence[0].overtime
+                          //             : null,
+                          //         a: attendence.isNotEmpty
+                          //             ? attendence[0].attendence
+                          //             : null,
+                          //         data: attendence.isNotEmpty
+                          //             ? attendence[0]
+                          //             : null,
+                          //       ),
+                          //     ),
+                          //   );
+                          // }
+                          else {
+                            showSnackBar(
+                                context: context,
+                                content: "Status Updated Successfully");
+                          }
+                        },
+                        icon: Icon(
+                          CupertinoIcons.time,
+                          size: h * 0.02,
+                        ),
+                        label: Text(
+                          'Update Today Status',
+                          style: TextStyle(fontSize: h * 0.017),
+                        ),
+                      );
+              },
+              error: (error, stackTrace) => ErrorText(error: error.toString()),
+              loading: () => const Loader());
         },
       ),
     );

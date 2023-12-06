@@ -100,4 +100,21 @@ class StaffController extends StateNotifier<bool> {
   Stream<List<StaffAttendence>> getStaffReport({required String staffId}) {
     return _staffRepository.getStaffReport(staffId: staffId);
   }
+
+  void editCurrendayStatus(
+      {required String attendence,
+      required String overTime,
+      required String amt,
+      required StaffAttendence data,
+      required BuildContext context}) async {
+    var copy =
+        data.copyWith(amt: amt, attendence: attendence, overtime: overTime);
+    final res = await _staffRepository.editCurrendayStatus(data: copy);
+    res.fold((l) {
+      showSnackBar(context: context, content: "Edit Failed");
+    }, (r) {
+      showSnackBar(context: context, content: "Edited Successfully");
+      Navigator.pop(context);
+    });
+  }
 }

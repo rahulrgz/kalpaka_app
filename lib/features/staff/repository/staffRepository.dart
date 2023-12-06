@@ -123,4 +123,14 @@ class StaffRepository {
                 StaffAttendence.fromMap(e.data() as Map<String, dynamic>))
             .toList());
   }
+
+  FutureEither editCurrendayStatus({required StaffAttendence data}) async {
+    try {
+      return right(data.ref?.update(data.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(fail: e.toString()));
+    }
+  }
 }

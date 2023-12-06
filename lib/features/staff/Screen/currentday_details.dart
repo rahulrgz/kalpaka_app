@@ -3,14 +3,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:kalpaka_app/model/attendenceOfStaff.dart';
 
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../controller/staffController.dart';
 
 class CurrentDetailsChange extends ConsumerStatefulWidget {
-  CurrentDetailsChange({super.key, required this.staffId});
+  CurrentDetailsChange(
+      {super.key,
+      required this.staffId,
+      required this.amt,
+      required this.overtime,
+      required this.a,
+      required this.data});
+  StaffAttendence? data;
+  String? amt;
+  String? overtime;
+  String? a;
 
   String staffId;
 
@@ -20,7 +30,7 @@ class CurrentDetailsChange extends ConsumerStatefulWidget {
 }
 
 class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
-  List<String> _presentStatus = ["Full Day", "Half Day", 'Leave'];
+  List<String> _presentStatus = ["Full Day", "Half Day", "Leave"];
   List<String> _overTime = ["1", "2", "3", "4", "5", "6"];
   String? selectedValue1;
   String? selectedValue2;
@@ -38,16 +48,49 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
         amt: amt);
   }
 
+  editCurrendayStatus(
+      {required String attendence,
+      required String overTime,
+      required String amt,
+      required BuildContext context}) {
+    ref.read(staffControllerProvider.notifier).editCurrendayStatus(
+        attendence: attendence,
+        overTime: overTime,
+        amt: amt,
+        data: widget.data!,
+        context: context);
+  }
+
+  editOrUpdateCheck() {
+    if (widget.overtime != null && widget.a != null) {
+      updateOrEditCheck = true;
+    } else {
+      updateOrEditCheck = false;
+    }
+  }
+
+  bool updateOrEditCheck = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    editOrUpdateCheck();
+    amtContoller = TextEditingController(
+        text: widget.amt != null ? widget.amt.toString() : '');
+    selectedValue1 = _presentStatus.contains(widget.a.toString())
+        ? widget.a.toString()
+        : "Leave";
+    selectedValue2 = _overTime.contains(widget.overtime.toString())
+        ? widget.overtime.toString()
+        : "1";
+
     print("staffId");
-    print(widget.staffId);
+    print(widget.overtime);
   }
 
   @override
   Widget build(BuildContext context) {
+    print("jd");
     return Scaffold(
       backgroundColor: Pallete.whiteColor,
       appBar: AppBar(
@@ -244,11 +287,19 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  currentdayStatus(
-                      attendence: selectedValue1.toString(),
-                      overTime: selectedValue2.toString(),
-                      context: context,
-                      amt: amtContoller.text.trim());
+                  if (updateOrEditCheck != true) {
+                    currentdayStatus(
+                        attendence: selectedValue1.toString(),
+                        overTime: selectedValue2.toString(),
+                        context: context,
+                        amt: amtContoller.text.trim());
+                  } else {
+                    editCurrendayStatus(
+                        attendence: selectedValue1.toString(),
+                        overTime: selectedValue2.toString(),
+                        context: context,
+                        amt: amtContoller.text.trim());
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(w * 0.85, h * 0.06),
@@ -256,7 +307,9 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(h * 0.15))),
                 child: Text(
-                  "Update Today Status",
+                  updateOrEditCheck != true
+                      ? "Update Today Status"
+                      : "Edit Status",
                   style: GoogleFonts.urbanist(
                       fontSize: h * 0.017,
                       fontWeight: FontWeight.w700,
