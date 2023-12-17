@@ -117,6 +117,7 @@ class StaffRepository {
     return _staff
         .doc(staffId.toString())
         .collection("staffAttendence")
+        .orderBy("uploadDate", descending: false)
         .snapshots()
         .map((event) => event.docs
             .map((e) =>

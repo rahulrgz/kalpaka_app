@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kalpaka_app/model/attendenceOfStaff.dart';
 
@@ -16,8 +17,10 @@ class CurrentDetailsChange extends ConsumerStatefulWidget {
       required this.amt,
       required this.overtime,
       required this.a,
-      required this.data});
+      required this.data,
+      required this.date});
   StaffAttendence? data;
+  DateTime? date;
   String? amt;
   String? overtime;
   String? a;
@@ -45,7 +48,8 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
         overtime: overTime,
         staffId: widget.staffId,
         context: context,
-        amt: amt);
+        amt: amt,
+        date: widget.date ?? DateTime.now());
   }
 
   editCurrendayStatus(
@@ -289,10 +293,11 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
                 onPressed: () {
                   if (updateOrEditCheck != true) {
                     currentdayStatus(
-                        attendence: selectedValue1.toString(),
-                        overTime: selectedValue2.toString(),
-                        context: context,
-                        amt: amtContoller.text.trim());
+                      attendence: selectedValue1.toString(),
+                      overTime: selectedValue2.toString(),
+                      context: context,
+                      amt: amtContoller.text.trim(),
+                    );
                   } else {
                     editCurrendayStatus(
                         attendence: selectedValue1.toString(),

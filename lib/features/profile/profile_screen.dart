@@ -262,7 +262,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: h * 0.007,
                     ),
                     Text(
-                      'Version 1.0.0',
+                      'Version 1.0.2`',
                       style: TextStyle(
                           fontSize: h * 0.017,
                           fontWeight: FontWeight.w300,

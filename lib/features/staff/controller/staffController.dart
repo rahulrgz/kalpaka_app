@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalpaka_app/model/staffModel.dart';
@@ -8,6 +6,9 @@ import '../../../core/commons/utils.dart';
 import '../../../model/attendenceOfStaff.dart';
 import '../repository/staffRepository.dart';
 
+DateTime now = DateTime.now();
+DateTime initialDateofAttendence =
+    DateTime(now.year, now.month, now.day, 0, 0, 0);
 final getStaffAttendenceProvider = StreamProvider.family.autoDispose(
     (ref, String data) => ref
         .watch(staffControllerProvider.notifier)
@@ -17,7 +18,8 @@ final getStaffReportProvider = StreamProvider.family.autoDispose(
         .watch(staffControllerProvider.notifier)
         .getStaffReport(
             staffId: staffId)); //toget the entire attendence report of staff
-final selectedDateProvider = StateProvider<DateTime?>((ref) => null);
+final selectedDateProvider =
+    StateProvider<DateTime?>((ref) => initialDateofAttendence);
 final getStaffProvider = StreamProvider((ref) => ref
     .watch(staffControllerProvider.notifier)
     .getStaffs()); //to get entire staff
@@ -67,11 +69,12 @@ class StaffController extends StateNotifier<bool> {
       required String overtime,
       required BuildContext context,
       required String amt,
+      required DateTime date,
       required String staffId}) async {
-    DateTime now = DateTime.now();
+    DateTime now = date;
     var datePicked1 = DateTime(now.year, now.month, now.day, 0, 0, 0);
     print("contr");
-    print(datePicked1);
+    // print(datePicked1);
     // selectedDate1 = value;
     // ref.watch(startDateProvider.notifier).update((state) => datePicked1);
     // String formattedDate = DateFormat('yyyy-MM-dd').format(now);

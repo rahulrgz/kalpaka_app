@@ -4,7 +4,6 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:kalpaka_app/core/theme/pallete.dart';
 import 'package:kalpaka_app/features/staff/Screen/currentday_details.dart';
 import 'package:kalpaka_app/features/staff/Screen/staff_report.dart';
@@ -195,9 +194,12 @@ class _ViewStaffState extends State<ViewStaff> {
                         //`selectedDate` the new date selected.
                         ("/////");
                         print(selectedDate);
+                        DateTime _datePicked1 = DateTime(selectedDate.year,
+                            selectedDate.month, selectedDate.day, 0, 0, 0);
+
                         ref
                             .read(selectedDateProvider.notifier)
-                            .update((state) => selectedDate);
+                            .update((state) => _datePicked1);
                       },
                       activeColor: const Color(0xffFFBF9B),
                       headerProps: const EasyHeaderProps(
@@ -411,8 +413,6 @@ class _ViewStaffState extends State<ViewStaff> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
-          DateTime? d = ref.watch(selectedDateProvider) ?? null;
-
           DateTime now = DateTime.now();
           var datePicked1 = DateTime(now.year, now.month, now.day, 0, 0, 0);
           DateTime? d1 = ref.watch(selectedDateProvider) ?? datePicked1;
@@ -425,17 +425,16 @@ class _ViewStaffState extends State<ViewStaff> {
           return ref.watch(getStaffAttendenceProvider(encode)).when(
               data: (attendence) {
                 print("aten");
+                DateTime now = DateTime.now();
+                DateTime formattedDate =
+                    DateTime(now.year, now.month, now.day, 0, 0, 0);
 
-                return attendence.isEmpty
-                    ? Text("No data updated")
-                    : FloatingActionButton.extended(
+                return formattedDate == ref.watch(selectedDateProvider) ||
+                        ref.watch(selectedDateProvider)!.isBefore(formattedDate)
+                    ? FloatingActionButton.extended(
                         backgroundColor: Pallete.darkColor,
                         foregroundColor: Pallete.whiteColor,
                         onPressed: () {
-                          DateTime now = DateTime.now();
-                          DateTime formattedDate =
-                              DateTime(now.year, now.month, now.day, 0, 0, 0);
-
                           if (ref.read(selectedDateProvider) == formattedDate ||
                               ref
                                   .read(selectedDateProvider)!
@@ -457,6 +456,7 @@ class _ViewStaffState extends State<ViewStaff> {
                                   data: attendence.isNotEmpty
                                       ? attendence[0]
                                       : null,
+                                  date: ref.read(selectedDateProvider),
                                 ),
                               ),
                             );
@@ -493,11 +493,17 @@ class _ViewStaffState extends State<ViewStaff> {
                           CupertinoIcons.time,
                           size: h * 0.02,
                         ),
-                        label: Text(
-                          'Update Today Status',
-                          style: TextStyle(fontSize: h * 0.017),
-                        ),
-                      );
+                        label: attendence.isEmpty
+                            ? Text(
+                                'Update Today Status',
+                                style: TextStyle(fontSize: h * 0.017),
+                              )
+                            : Text(
+                                'Edit Status',
+                                style: TextStyle(fontSize: h * 0.017),
+                              ),
+                      )
+                    : Text("No data updated");
               },
               error: (error, stackTrace) => ErrorText(error: error.toString()),
               loading: () => const Loader());
