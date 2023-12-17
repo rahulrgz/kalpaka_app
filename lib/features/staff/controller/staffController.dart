@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kalpaka_app/model/attendenceOfStaff.dart';
 import 'package:kalpaka_app/model/staffModel.dart';
 
 import '../../../core/commons/utils.dart';
-import '../../../model/attendenceOfStaff.dart';
 import '../repository/staffRepository.dart';
 
 DateTime now = DateTime.now();

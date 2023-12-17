@@ -52,7 +52,7 @@ class _StaffReportScreenState extends State<StaffReportScreen> {
                   .when(
                       data: (attendenceReport) {
                         return DataTable(
-                            columnSpacing: w * 0.1,
+                            columnSpacing: w * 0.05,
                             columns: [
                               DataColumn(
                                 label: Text(
@@ -89,9 +89,8 @@ class _StaffReportScreenState extends State<StaffReportScreen> {
                             ],
                             rows:
                                 List.generate(attendenceReport.length, (index) {
-                              final String formattedDate =
-                                  DateFormat('yyyy-MM-dd').format(
-                                      attendenceReport[index].uploadDate);
+                              final String formattedDate = DateFormat('d MMM,y')
+                                  .format(attendenceReport[index].uploadDate);
 
                               return DataRow(cells: [
                                 DataCell(Text(formattedDate.toString())),

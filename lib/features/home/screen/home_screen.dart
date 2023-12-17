@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Container(
-                          height: h * 1.02,
+                          height: h * 1.05,
                           width: w,
                           decoration: BoxDecoration(
                               color: Pallete.primaryColor,
@@ -494,432 +494,436 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                   color: Pallete.whiteColor,
                                 ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SizedBox(
-                                      height: h * 0.02,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: w * 0.065,
-                                        ),
-                                        Text(
-                                          'FEATURES',
-                                          style: TextStyle(
-                                              fontSize: h * 0.014,
-                                              fontWeight: FontWeight.w600,
-                                              color: Pallete.darkColor),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: h * 0.01),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    // Navigator.push(
-                                                    //   context,
-                                                    //   CupertinoPageRoute(
-                                                    //       builder: (context) =>
-                                                    //           StaffReportScreen()),
-                                                    // );
-                                                  },
-                                                  icon: Icon(
-                                                    CupertinoIcons.person_2,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Office',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'Staffs',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      CupertinoPageRoute(
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: h * 0.01),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SizedBox(
+                                        height: h * 0.02,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: w * 0.065,
+                                          ),
+                                          Text(
+                                            'FEATURES',
+                                            style: TextStyle(
+                                                fontSize: h * 0.014,
+                                                fontWeight: FontWeight.w600,
+                                                color: Pallete.darkColor),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: h * 0.01),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      // Navigator.push(
+                                                      //   context,
+                                                      //   CupertinoPageRoute(
+                                                      //       builder: (context) =>
+                                                      //           StaffReportScreen()),
+                                                      // );
+                                                    },
+                                                    icon: Icon(
+                                                      CupertinoIcons.person_2,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Office',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'Staffs',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        CupertinoPageRoute(
+                                                            builder: (context) =>
+                                                                const StaffScreen()),
+                                                      );
+                                                    },
+                                                    icon: Icon(
+                                                      CupertinoIcons.person_3,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Staff',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'Details',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        CupertinoPageRoute(
+                                                            builder: (context) =>
+                                                                const DocumentScreen()),
+                                                      );
+                                                    },
+                                                    icon: Icon(
+                                                      CupertinoIcons.doc,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Documents',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'Details',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        CupertinoPageRoute(
+                                                            builder: (context) =>
+                                                                const OrderScreen()),
+                                                      );
+                                                    },
+                                                    icon: Icon(
+                                                      CupertinoIcons.cart,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Order',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'Details',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.015,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        CupertinoPageRoute(
                                                           builder: (context) =>
-                                                              const StaffScreen()),
-                                                    );
-                                                  },
-                                                  icon: Icon(
-                                                    CupertinoIcons.person_3,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Staff',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'Details',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      CupertinoPageRoute(
-                                                          builder: (context) =>
-                                                              const DocumentScreen()),
-                                                    );
-                                                  },
-                                                  icon: Icon(
-                                                    CupertinoIcons.doc,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Documents',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'Details',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      CupertinoPageRoute(
-                                                          builder: (context) =>
-                                                              const OrderScreen()),
-                                                    );
-                                                  },
-                                                  icon: Icon(
-                                                    CupertinoIcons.cart,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Order',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'Details',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: h * 0.015,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      CupertinoPageRoute(
-                                                        builder: (context) =>
-                                                            const AnalysisScreen(),
+                                                              const AnalysisScreen(),
+                                                        ),
+                                                      );
+                                                    },
+                                                    icon: Icon(
+                                                      CupertinoIcons
+                                                          .chart_bar_square,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Analytics',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'Details',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      CupertinoIcons.calendar,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Meeting',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'Schedules',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      CupertinoIcons.timer,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Daily',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'Reports',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor:
+                                                    Pallete.primaryColor,
+                                                radius: h * 0.027,
+                                                child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      CupertinoIcons
+                                                          .right_chevron,
+                                                      size: h * 0.022,
+                                                      color: Pallete.darkColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: h * 0.01,
+                                              ),
+                                              Text(
+                                                'Explore',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                              Text(
+                                                'More',
+                                                style: TextStyle(
+                                                    fontSize: h * 0.013,
+                                                    color: Pallete.darkColor),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.03,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: w * 0.065,
+                                          ),
+                                          Text(
+                                            'Members',
+                                            style: TextStyle(
+                                                fontSize: h * 0.014,
+                                                fontWeight: FontWeight.w600,
+                                                color: Pallete.darkColor),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.01,
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.13,
+                                        child: ref.watch(allUsrProvider).when(
+                                            data: (users) {
+                                              return ListView.builder(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount: users.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: h * 0.02),
+                                                      child: SizedBox(
+                                                        width: w * 0.17,
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            CircleAvatar(
+                                                              radius: h * 0.027,
+                                                              backgroundImage:
+                                                                  NetworkImage(users[
+                                                                          index]
+                                                                      .profile
+                                                                      .toString()),
+                                                            ),
+                                                            SizedBox(
+                                                              height: h * 0.01,
+                                                            ),
+                                                            Text(
+                                                              users[index]
+                                                                  .name
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      h * 0.015,
+                                                                  color: Pallete
+                                                                      .darkColor),
+                                                            ),
+                                                            Text(
+                                                              users[index]
+                                                                  .label
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      h * 0.01,
+                                                                  color: Pallete
+                                                                      .darkColor),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     );
-                                                  },
-                                                  icon: Icon(
-                                                    CupertinoIcons
-                                                        .chart_bar_square,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Analytics',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'Details',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    CupertinoIcons.calendar,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Meeting',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'Schedules',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    CupertinoIcons.timer,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Daily',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'Reports',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  Pallete.primaryColor,
-                                              radius: h * 0.027,
-                                              child: IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    CupertinoIcons
-                                                        .right_chevron,
-                                                    size: h * 0.022,
-                                                    color: Pallete.darkColor,
-                                                  )),
-                                            ),
-                                            SizedBox(
-                                              height: h * 0.01,
-                                            ),
-                                            Text(
-                                              'Explore',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                            Text(
-                                              'More',
-                                              style: TextStyle(
-                                                  fontSize: h * 0.013,
-                                                  color: Pallete.darkColor),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: h * 0.03,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: w * 0.065,
-                                        ),
-                                        Text(
-                                          'USERS',
-                                          style: TextStyle(
-                                              fontSize: h * 0.014,
-                                              fontWeight: FontWeight.w600,
-                                              color: Pallete.darkColor),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: h * 0.01,
-                                    ),
-                                    SizedBox(
-                                      height: h * 0.11,
-                                      child: ref.watch(allUsrProvider).when(
-                                          data: (users) {
-                                            return ListView.builder(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemCount: users.length,
-                                                itemBuilder: (context, index) {
-                                                  return Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: h * 0.02),
-                                                    child: SizedBox(
-                                                      width: w * 0.17,
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          CircleAvatar(
-                                                            radius: h * 0.027,
-                                                            backgroundImage:
-                                                                NetworkImage(users[
-                                                                        index]
-                                                                    .profile
-                                                                    .toString()),
-                                                          ),
-                                                          SizedBox(
-                                                            height: h * 0.01,
-                                                          ),
-                                                          Text(
-                                                            users[index]
-                                                                .name
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                    h * 0.015,
-                                                                color: Pallete
-                                                                    .darkColor),
-                                                          ),
-                                                          Text(
-                                                            users[index]
-                                                                .label
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                    h * 0.01,
-                                                                color: Pallete
-                                                                    .darkColor),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  );
-                                                });
-                                          },
-                                          error: (error, stackTrace) =>
-                                              ErrorText(
-                                                  error: error.toString()),
-                                          loading: () => const Loader()),
-                                    ),
-                                  ],
+                                                  });
+                                            },
+                                            error: (error, stackTrace) =>
+                                                ErrorText(
+                                                    error: error.toString()),
+                                            loading: () => const Loader()),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],

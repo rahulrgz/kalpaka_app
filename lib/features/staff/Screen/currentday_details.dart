@@ -34,7 +34,7 @@ class CurrentDetailsChange extends ConsumerStatefulWidget {
 
 class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
   List<String> _presentStatus = ["Full Day", "Half Day", "Leave"];
-  List<String> _overTime = ["1", "2", "3", "4", "5", "6"];
+  List<String> _overTime = ["0", "1", "2", "3", "4", "5", "6"];
   String? selectedValue1;
   String? selectedValue2;
   TextEditingController amtContoller = TextEditingController();
@@ -83,10 +83,10 @@ class _CurrentDetailsChangeState extends ConsumerState<CurrentDetailsChange> {
         text: widget.amt != null ? widget.amt.toString() : '');
     selectedValue1 = _presentStatus.contains(widget.a.toString())
         ? widget.a.toString()
-        : "Leave";
+        : "Full Day";
     selectedValue2 = _overTime.contains(widget.overtime.toString())
         ? widget.overtime.toString()
-        : "1";
+        : "0";
 
     print("staffId");
     print(widget.overtime);

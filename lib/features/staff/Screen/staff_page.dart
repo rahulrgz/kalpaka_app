@@ -61,15 +61,24 @@ class _StaffScreenState extends State<StaffScreen> {
                             },
                             child: ListTile(
                               leading: CircleAvatar(
-                                radius: h * 0.023,
+                                radius: h * 0.03,
                                 foregroundImage: NetworkImage(
                                     staffs[index].profile.toString()),
                               ),
-                              title: Text(staffs[index].name),
-                              subtitle: const Text('Status: Full Day'),
-                              trailing: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.more_horiz_outlined)),
+                              title: Text(
+                                staffs[index].name,
+                                style: TextStyle(
+                                    fontSize: w * 0.042,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                staffs[index].phone,
+                                style: TextStyle(fontSize: w * 0.03),
+                              ),
+                              // trailing: Icon(
+                              //   CupertinoIcons.app_badge,
+                              //   size: w * 0.06,
+                              // ),
                             ),
                           ),
                         );
